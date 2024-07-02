@@ -15,51 +15,9 @@
 ?>
   
 
-  <section class="section featured-car">
+  <section class="section-featured-car">
     <div class="container">
-    <div class="filter-section">
-    <h3>Filter Cars</h3>
-    <form id="filter-form">
-      <div class="filter-group">
-        <label for="brand">Brand</label>
-        <select id="brand" name="brand">
-          <option value="all">All</option>
-          <option value="toyota">Toyota</option>
-          <option value="audi">Audi</option>
-          <option value="suzuki">Suzuki</option>
-          <option value="bmw">BMW</option>
-          <option value="mercedes">Mercedes</option>
-        </select>
-      </div>
-      <div class="filter-groups">
-        <label for="price">Price</label>
-        <select id="price" name="price">
-          <option value="all">All</option>
-          <option value="low">Below ₹15000</option>
-          <option value="mid">₹15000 - ₹20000</option>
-          <option value="high">Above ₹20000</option>
-        </select>
-      </div>
-      <div class="filter-groups">
-        <label for="ac">AC</label>
-        <select id="ac" name="ac">
-          <option value="all">All</option>
-          <option value="ac">AC</option>
-          <option value="non-ac">Non-AC</option>
-        </select>
-      </div>
-      <div class="filter-groups">
-        <label for="seating">Seating Capacity</label>
-        <select id="seating" name="seating">
-          <option value="all">All</option>
-          <option value="4">4 People</option>
-          <option value="6">6 People</option>
-          <option value="8">8 People</option>
-        </select>
-      </div>
-      <button type="button" onclick="applyFilters()">Apply Filters</button>
-    </form>
-  </div>
+    
       <ul class="featured-car-list">
         <?php
         include('config.php');
@@ -100,6 +58,49 @@
         ?>
       </ul>
     </div>
+    <div class="filter-section">
+    <h3>Filter Cars</h3>
+    <form id="filter-form">
+      <div class="filter-group">
+        <label for="brand">Brand</label>
+        <select id="brand" name="brand">
+          <option value="all">All</option>
+          <option value="toyota">Toyota</option>
+          <option value="audi">Audi</option>
+          <option value="suzuki">Suzuki</option>
+          <option value="bmw">BMW</option>
+          <option value="mercedes">Mercedes</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="price">Price</label>
+        <select id="price" name="price">
+          <option value="all">All</option>
+          <option value="low">Below ₹15000</option>
+          <option value="mid">₹15000 - ₹20000</option>
+          <option value="high">Above ₹20000</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="ac">AC</label>
+        <select id="ac" name="ac">
+          <option value="all">All</option>
+          <option value="ac">AC</option>
+          <option value="non-ac">Non-AC</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="seating">Seating Capacity</label>
+        <select id="seating" name="seating">
+          <option value="all">All</option>
+          <option value="4">4 People</option>
+          <option value="6">6 People</option>
+          <option value="8">8 People</option>
+        </select>
+      </div>
+      <button type="button" onclick="applyFilters()">Apply Filters</button>
+    </form>
+  </div>
   </section>
   <script src="js/services.js"></script>
   <?php include('footer.php'); ?>

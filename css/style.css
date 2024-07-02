@@ -95,33 +95,3 @@ nav a :hover{
 .tabs button.active {
     background: #555;
 }
-
-form {
-    display: none;
-    width: 300px;
-    margin: 0 auto;
-}
-
-form.active {
-    display: block;
-}
-
-input[type="text"], input[type="password"], input[type="email"], input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-input[type="submit"] {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #555;
-}
-
-
-

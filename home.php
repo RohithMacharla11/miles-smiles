@@ -60,20 +60,6 @@
     </div>
 </div>
 
-<!-- Modal for login -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="loginForm" action="signin.php" method="post">
-            <h2>Sign In</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Sign In</button>
-        </form>
-    </div>
-</div>
 
 <div class="supporting">
     <h1>Find the Best Car Hire Deals in your Location</h1>
