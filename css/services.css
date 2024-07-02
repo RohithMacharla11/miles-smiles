@@ -1,0 +1,147 @@
+
+
+/* Filter section styling */
+/* Filter section styling */
+.filter-section {
+  position: fixed;
+  margin-top: 70px;
+  border-radius: 10px;
+  right: 10px;
+  background-color: rgb(238, 236, 236);
+  padding: 20px;
+  box-shadow: 0 4px
+}
+
+.filter-group {
+  margin-bottom: 11px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 6px;
+}
+
+.filter-section button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Container styling */
+.container {
+  max-width: 1200px;
+  margin-top:30px ; /* Adjust margin to account for the fixed navbar height */
+  padding: 20px;
+
+  /* border: 2px solid rgb(255, 255, 255); */
+  border-radius: 12px;
+}
+
+.featured-car-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.car-item {
+  display: none;
+}
+
+.car-item.show {
+  display: block;
+}
+
+.featured-car-card {
+  background: #ecfaff;
+  border: 1px solid #e4d9d9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 10px rgba(20, 20, 20, 0.1);
+}
+
+.card-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  color: black;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.year {
+  font-size: 1em;
+  color: #666;
+}
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.card-list-item {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
+
+.card-list-item ion-icon {
+  margin-right: 10px;
+}
+
+.card-item-text {
+  font-size: 1em;
+}
+
+.card-price-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.featured-car-card:hover .card-banner img {
+  transform: scale(1.25);
+}
