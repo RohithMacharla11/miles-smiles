@@ -4,7 +4,6 @@
   border: border-box;
 }
 
-
   h1{
     padding-top:1px;
   }
@@ -38,7 +37,6 @@ position: sticky;
 
    }
 
-/*---------------------------------------------------------------------------------------------------------------------*/
    body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -141,18 +139,7 @@ input, select {
     background-color: #0056b3;
 }
 
-/*-----------------------------------------------------------------------------------------------------------------*/
-.roadmap{
-  margin-top: 45px;
-   background: url("images/roadmap1.png"); 
-  background-position: top;
-  background-size: cover;
-  margin-left: auto;
-  margin-right: auto;
-  height: 530px;
-  width: 93%;
- border-radius: 15px;
-}
+
 
 /* =============iccccccccccccccc---------------------------- */
 
@@ -196,7 +183,7 @@ input, select {
   margin-top: 45px;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 .container h2 {
   margin-bottom: 30px;
@@ -226,5 +213,96 @@ input, select {
   color: #666;
 }
 
-/*------------------------------------------------------*/
 
+/* <div class="container-section-cars">
+    <div class="content-section-cars"> */
+.container-section-cars{
+  display:flex;
+  gap: 45px;
+  height: 750px;
+  margin-top: 50px;
+  width: 95%;
+  /* background-color: rgb(240, 248, 255); */
+  margin-left: auto;
+  margin-right: auto;
+}
+.content-section-cars{
+  flex:40%;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+}
+.content-section-cars button{
+  color: #ccc;
+  padding: 20px 40px; 
+  font-size: 18px; 
+  width: 200px; 
+  height: 60px;
+  background-color: #000000;
+  border-radius: 45px;
+margin-left: 200px;
+}
+.content-section-cars h1{
+  padding-top: 18px;
+  padding-left: 33px;
+  text-align: center;
+}
+.content-section-cars p {
+  padding-top: 45px;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+ padding-left: 33px;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* <div class="image-section-cars">
+<div class="img1"></div> */ 
+.img1{
+  padding-top: 18px;
+}
+.image-section-cars{
+flex: 20;
+}
+.down-section{
+  margin-top: 45px;
+  display: flex;
+  column-gap: 18px;
+}
+
+.roadmap{
+  margin-top: 45px;
+  display:flex;
+/* background-color: white; */
+width: 90%;
+margin-right:auto ;
+margin-left:auto ;
+}
+.onroad-support{
+  flex: 60%;
+}
+.onroad-support h1{
+  padding-top: 95px;
+  font-weight: 730;
+  text-align: center;
+}
+.onroad-support p{
+  margin-top: 43px;
+  letter-spacing: 1.5px;
+  line-height: 2;
+  padding: 33px;
+ 
+}
+.img-roadmap
+{
+  display: flex;
+  flex:40%;
+  gap: 45px;
+  padding: 18px;
+  
+}
+.img-roadmap img{
+  border-radius: 18px 0;
+}

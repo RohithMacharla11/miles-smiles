@@ -11,10 +11,10 @@
 <body>
 <?php include('header.php'); ?>
 
-<marquee> <h1>Drive with Confidence, Travel with Comfort. </h1></marquee>
+<marquee><h1> Drive with Confidence, Travel with Comfort.</h1></marquee>
 
-<div class="hero">
-    <div class="booking-container">
+<div  class="hero">
+    <div  class="booking-container">
         <div class="booking-options">
             <button  onclick="showOneWay(event)" class="active">One Way</button>
             <button onclick="showRoundTrip(event)">Round Trip</button>
@@ -61,10 +61,42 @@
 </div>
 
 
+
 <div class="supporting">
     <h1>Find the Best Car Hire Deals in your Location</h1>
     <p>These are the most popular types of rental cars available for pickup at a location near you within the next 30 days.</p>
 </div>
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+<div class="container-section-cars">
+    <div class="content-section-cars">
+  <h1>  Welcome to Your Journey with Car Rental </h1>
+  <p>Discover the freedom of the open road with Car Rental, your trusted companion for unforgettable travel experiences. For over [X] years, Car Rental has been a beacon of reliability in car rentals, navigating both bustling cities and remote escapes with unmatched reliability. Embrace the journey with confidence in our meticulously maintained vehicles tailored to your adventure—from sleek city cruisers to rugged SUVs built for off-road exploration. <br>
+<br>
+Dive into our curated guides and insider tips to uncover hidden gems, scenic viewpoints, and local favorites that transform your trip into an extraordinary adventure. Unlock exclusive discounts on attractions, accommodations, and more with our local partnerships to maximize savings and experiences along the way. Booking is effortless—reserve your ideal vehicle online or with our friendly support team in just a few clicks. Personalized support ensures your journey is as smooth as the ride itself, from booking to drop-off.<br>
+<br></p>
+<button onclick="location.href='#hero'">Book a car</button>
+
+    </div>
+
+    <div class="image-section-cars">
+        <div class="img1">
+           <img src="css/images/family3.jpg" height="350px" width="715">
+        </div>
+
+<div class="down-section">
+    <div class="columns">
+        <img src="css/images/family1.jpg" height="280px" width="350">
+    </div>
+    <div class="columns">
+        <img src="css/images/family2.jpg" height="280px" width="350">
+    </div>
+</div>
+    </div>
+</div>
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////// -->
 
 <div class="container">
     <h2>Why book with us?</h2>
@@ -90,7 +122,23 @@
             <p>Have already booked on one of the fastest-growing car rental booking websites.</p>
         </div>
     </div>
+</div>
+
+    <!--===================================================--->
+
+ <!--===================================================--->
 </div><div class="roadmap">
+    <div class="onroad-support">
+        <h1><B>24/7 Roadside Assistance</B></h1>
+        <p>Enjoy peace of mind with our comprehensive 24/7 roadside assistance. 
+           Whether you're navigating bustling cities or exploring remote escapes in India, 
+           Car Rental ensures you're covered every step of the way. Focus on
+           making the most of your journey while we handle any unexpected roadside needs.
+    </div>
+    <div class="img-roadmap">
+        <img src="css/images/person.jpg" height="450px" width="300px" border-radius="10px">
+        <img src="css/images/travel1.jpeg" height="450px" width="300px" border-radius=" 10px">
+    </div>
 </div>
 <!-- ============================================================= -->
  
@@ -108,19 +156,17 @@
 
 <div class="scroller" data-animated="true">
     <ul class="img-list scroller__inner">
-        <li><img src="css/images/toyota-logo.png" alt="toyota-logo"></li>
-        <li><img src="css/images/mahindra-logo.png" alt="mahindra-logo"></li>
-        <li><img src="css/images/Tata-logo.png" alt="Tata-logo"></li>
-        <li><img src="css/images/bharatbenz logo.png" alt="bharatbenz-logo"></li>
-        <li><img src="css/images/premier logo.png" alt="premier-logo"></li>
-        <li><img src="css/images/force logo.png" alt="force-logo"></li>
-        <li><img src="css/images/hindustan logo.png" alt="hindustan-logo"></li>
+        <img src="css/images/toyota-logo.png" alt="toyota-logo"></li>
+        <img src="css/images/mahindra-logo.png" alt="mahindra-logo"></li>
+        <img src="css/images/Tata-logo.png" alt="Tata-logo"></li>
+        <img src="css/images/bharatbenz logo.png" alt="bharatbenz-logo"></li>
+        <img src="css/images/premier logo.png" alt="premier-logo"></li>
+        <img src="css/images/force logo.png" alt="force-logo"></li>
+        <img src="css/images/hindustan logo.png" alt="hindustan-logo"></li>
     </ul>
 </div>
 
-<div class="footer">
-    <p>&copy; 2024 Company Name. All rights reserved.</p>
-</div>
+<!--======================================================================================================-->
 
 <script>
 
@@ -247,6 +293,7 @@
 </script>
 
     <form id="bookingForm" action="bookings.php" method="post">
+        <input type="hidden" name="id" id="id">
         <input type="hidden" name="booking_type" id="booking_type">
         <input type="hidden" name="pickup" id="pickup">
         <input type="hidden" name="dropoff" id="dropoff">
@@ -259,6 +306,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="js/IG.js"></script>
+
 
 </body>
 </html>

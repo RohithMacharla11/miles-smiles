@@ -56,6 +56,7 @@
   </div>
 
   <form id="bookingForm" action="save_booking.php" method="post">
+    <input type = "hidded" name = "detail_id" id = "detail-id">
     <input type="hidden" name="car_id" id="car-id">
     <input type="hidden" name="title" id="car-title-hidden">
     <input type="hidden" name="year" id="car-year-hidden">

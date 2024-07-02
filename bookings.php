@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
     header('Location: signin.php');
     exit;
 }
-
+$id = $_POST['id'];
 $booking_type = $_POST['booking_type'];
 $pickup = $_POST['pickup'];
 $dropoff = $_POST['dropoff'];

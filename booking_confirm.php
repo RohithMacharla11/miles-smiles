@@ -27,7 +27,7 @@ $stmt = $conn->prepare("
     FROM car_details cd
     JOIN cars c ON cd.car_id = c.car_id
     WHERE cd.username = :username
-    ORDER BY cd.booking_date DESC, cd.id DESC
+    ORDER BY cd.booking_date DESC, cd.detail_id DESC
     LIMIT 1
 ");
 $stmt->bindParam(':username', $currentUsername);

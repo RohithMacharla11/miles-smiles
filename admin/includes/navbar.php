@@ -37,7 +37,7 @@
                <div class="bg-white py-2 collapse-inner rounded">
                    <h6 class="collapse-header">Car Options:</h6>
                    <a class="collapse-item" href="active_cars.php">Active Cars</a>
-                   <a class="collapse-item" href="car_bookings.php">Under Maintainence</a>
+                   <a class="collapse-item" href="car_bookings.php">Car Bookings</a>
                </div>
            </div>
        </li>

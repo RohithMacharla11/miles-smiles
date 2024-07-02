@@ -105,68 +105,74 @@ include('includes/navbar.php');
       ?>
       <div class="table-responsive">
 
-        <?php
+      <?php
+$connection = mysqli_connect("localhost", "root", "", "car_users");
 
-        $connection = mysqli_connect("localhost", "root", "", "car_users");
-        $query = "SELECT * FROM car_details";
-        $query_run = mysqli_query($connection, $query);
-        ?>
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th> User Name</th>
-              <th> Car Title </th>
-              <th>Price </th>
-              <th>License Number </th>
-              <th>Booking Type </th>
-              <th>Pickup Location </th>
-              <th>Dropoff Location </th>
-              <th>Pickup Date </th>
-              <th>Pickup Time </th>
-              <th>Return Date </th>
-              <th>Airport Type </th>
-              <th>Booking Status </th>
-              <th>EDIT </th>
-              <th>DELETE </th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            if (mysqli_num_rows($query_run) > 0) {
-              while ($row = mysqli_fetch_assoc($query_run)) {
-            ?>
-                <tr>
-                <td><?php echo $row['car_id']; ?></td>
-                  <td><?php echo $row['title']; ?></td>
-                  <td><?php echo $row['year']; ?></td>
-                  <td><?php echo $row['price']; ?></td>
-                  <td><?php echo $row['details']; ?></td>
-                  <td><?php echo $row['images']; ?></td>
-                  <td><?php echo $row['license_number']; ?></td>
-                  <td><?php echo $row['car_owner']; ?></td>
-                  <td><?php echo $row['car_status']; ?></td>
-                  <td>
-                    <form action="act_car_register_edit.php" method="post">
-                      <input type="hidden" name="edit_carid" value="<?php echo $row['car_id']; ?>">
-                      <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
-                    </form>
-                  </td>
-                  <td>
-                    <form action="acar_code.php" method="post">
-                      <input type="hidden" name="delete_carid" value="<?php echo $row['car_id']; ?>">
-                      <button type="submit" name="cdelete_btn" class="btn btn-danger"> DELETE</button>
-                    </form>
-                  </td>
-                </tr>
-            <?php
-              }
-            } else {
-              echo "No Record Found";
-            }
-            ?>
+$query = "SELECT cd.username, cd.title, cd.price, c.license_number, b.booking_type, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.return_date, b.airport_type, b.booking_status 
+          FROM car_details cd 
+          JOIN cars c ON cd.car_id = c.car_id
+          JOIN bookings b ON cd.detail_id = b.car_details_id";
 
-          </tbody>
-        </table>
+$query_run = mysqli_query($connection, $query);
+?>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Car Title</th>
+      <th>Price</th>
+      <th>License Number</th>
+      <th>Booking Type</th>
+      <th>Pickup Location</th>
+      <th>Dropoff Location</th>
+      <th>Pickup Date</th>
+      <th>Pickup Time</th>
+      <th>Return Date</th>
+      <th>Airport Type</th>
+      <th>Booking Status</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    if (mysqli_num_rows($query_run) > 0) {
+      while ($row = mysqli_fetch_assoc($query_run)) {
+    ?>
+        <tr>
+          <td><?php echo $row['username']; ?></td>
+          <td><?php echo $row['title']; ?></td>
+          <td><?php echo $row['price']; ?></td>
+          <td><?php echo $row['license_number']; ?></td>
+          <td><?php echo $row['booking_type']; ?></td>
+          <td><?php echo $row['pickup']; ?></td>
+          <td><?php echo $row['dropoff']; ?></td>
+          <td><?php echo $row['pickup_date']; ?></td>
+          <td><?php echo $row['pickup_time']; ?></td>
+          <td><?php echo $row['return_date']; ?></td>
+          <td><?php echo $row['airport_type']; ?></td>
+          <td><?php echo $row['booking_status']; ?></td>
+          <td>
+            <form action="act_car_register_edit.php" method="post">
+              <input type="hidden" name="edit_carid" value="<?php echo $row['username']; ?>">
+              <button type="submit" name="edit_btn" class="btn btn-success">EDIT</button>
+            </form>
+          </td>
+          <td>
+            <form action="acar_code.php" method="post">
+              <input type="hidden" name="delete_carid" value="<?php echo $row['username']; ?>">
+              <button type="submit" name="cdelete_btn" class="btn btn-danger">DELETE</button>
+            </form>
+          </td>
+        </tr>
+    <?php
+      }
+    } else {
+      echo "<tr><td colspan='14'>No Record Found</td></tr>";
+    }
+    ?>
+  </tbody>
+</table>
 
       </div>
     </div>
