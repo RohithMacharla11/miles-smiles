@@ -2,86 +2,63 @@
 include("security.php");
 $connection = mysqli_connect("localhost", "root", "", "car_users");
 
-if (isset($_POST['cregisterbtn'])) {
-    $carname = $_POST['carname'];
-    $year = $_POST['year'];
-    $price = $_POST['price'];
-    $details = $_POST['details'];
-    $images = $_POST['images'];
-    $license_number = $_POST['license_number'];
-    $owner_name = $_POST['owner_name'];
-    $car_status = $_POST['car_status'];
-
-    // JSON-encode the details and images arrays
-    $details_json = json_encode($details);
-    $images_json = json_encode($images);
-
-    $query = "INSERT INTO cars (title, year, price, details, images, license_number, car_owner, car_status) VALUES ('$carname', '$year', '$price', '$details_json', '$images_json', '$license_number', '$owner_name', '$car_status')";
-    $query_run = mysqli_query($connection, $query);
-    if ($query_run) {
-        echo "Saved";
-        $_SESSION['success'] = "Car Added";
-        header('Location: active_cars.php');
-    } else {
-        echo "Not Saved";
-        $_SESSION['status'] = "Car Not Added";
-        header('Location: active_cars.php');
-    }
-}
-if(isset($_POST['cupdatebtn'])){
-    $id = $_POST['edit_carid'];
-    $carname = $_POST['edit_carname'];
-    $year = $_POST['edit_year'];
+if(isset($_POST['bupdatebtn'])){
+    $username = $_POST['edit_username'];
+    $title = $_POST['edit_title'];
     $price = $_POST['edit_price'];
-    $details = $_POST['edit_details'];
-    $images = $_POST['edit_images'];
     $license_number = $_POST['edit_license_number'];
-    $owner_name = $_POST['edit_owner_name'];
-    $car_status = $_POST['edit_car_status'];
+    $booking_type = $_POST['edit_booking_type'];
+    $pickup = $_POST['edit_pickup'];
+    $dropoff = $_POST['edit_dropoff'];
+    $pickup_date = $_POST['edit_pickup_date'];
+    $pickup_time = $_POST['edit_pickup_time'];
+    $return_date = $_POST['edit_return_date'];
+    $airport_type = $_POST['edit_airport_type'];
+    $booking_status = $_POST['edit_booking_status'];
 
-    // JSON-encode the details and images arrays
-    $details_json = json_encode($details);
-    $images_json = json_encode($images);
-
-    $query = "UPDATE cars SET 
-                title = '$carname', 
-                year = '$year', 
-                price = '$price', 
-                details = '$details_json', 
-                images = '$images_json', 
-                license_number = '$license_number', 
-                car_owner = '$owner_name', 
-                car_status = '$car_status'
-              WHERE car_id = '$id'";
+    $query = "UPDATE car_details cd
+              JOIN cars c ON cd.car_id = c.car_id
+              JOIN bookings b ON cd.detail_id = b.car_details_id
+              SET cd.title = '$title',
+                  cd.price = '$price',
+                  c.license_number = '$license_number',
+                  b.booking_type = '$booking_type',
+                  b.pickup = '$pickup',
+                  b.dropoff = '$dropoff',
+                  b.pickup_date = '$pickup_date',
+                  b.pickup_time = '$pickup_time',
+                  b.return_date = '$return_date',
+                  b.airport_type = '$airport_type',
+                  b.booking_status = '$booking_status'
+              WHERE cd.username = '$username'";
     
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){
-        $_SESSION['success'] = "Car data is updated";
-        header('Location: active_cars.php');
+        $_SESSION['success'] = "Booking data is updated";
+        header('Location: car_bookings.php');
     } else {
-        $_SESSION['status'] = "Car data is not updated";
-        header('Location: active_cars.php');
+        $_SESSION['status'] = "Booking data is not updated";
+        header('Location: car_bookings.php');
     }
 }
 
-if(isset($_POST['cdelete_btn']))
-{
-    $id = $_POST['delete_carid'];
+if(isset($_POST['bdelete_btn'])){
+    $username = $_POST['delete_bookingid'];
 
-    $query = "DELETE FROM cars WHERE car_id='$id' ";
+    $query = "DELETE cd, c, b
+              FROM car_details cd
+              JOIN cars c ON cd.car_id = c.car_id
+              JOIN bookings b ON cd.detail_id = b.car_details_id
+              WHERE cd.username = '$username'";
     $query_run = mysqli_query($connection, $query);
 
-    if($query_run)
-    {
-        $_SESSION['success'] = "User Data is Deleted";
-        header('Location: active_cars.php'); 
-    }
-    else
-    {
-        $_SESSION['status'] = "User Data is NOT DELETED";
-        header('Location: active_cars.php'); 
+    if($query_run){
+        $_SESSION['success'] = "Booking data is deleted";
+        header('Location: car_bookings.php'); 
+    } else {
+        $_SESSION['status'] = "Booking data is not deleted";
+        header('Location: car_bookings.php'); 
     }    
 }
-
 ?>

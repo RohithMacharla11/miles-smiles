@@ -14,51 +14,59 @@
   }
 ?>
   
-
-  <section class="section-featured-car">
-    <div class="container">
-    
-      <ul class="featured-car-list">
-        <?php
-        include('config.php');
-        $stmt = $conn->prepare("SELECT * FROM cars");
+<section class="section-featured-car">
+  <div class="container">
+    <ul class="featured-car-list">
+      <?php
+      include('config.php');
+      $stmt = $conn->prepare("
+            SELECT c.*, b.booking_status 
+            FROM cars c
+            LEFT JOIN car_details cd ON c.car_id = cd.car_id
+            LEFT JOIN bookings b ON cd.detail_id = b.car_details_id
+        ");
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $cars = $stmt->fetchAll();
 
-        foreach ($cars as $row) {
-          $details = json_decode($row['details']);
-          $images = json_decode($row['images']);
-          echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day', '/month'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
-          echo '    <div class="featured-car-card">';
-          echo '        <figure class="card-banner">';
-          echo '            <a href="details.php" class="car-link" data-car=\'{"id": "' . $row['car_id'] . '","title": "' . $row['title'] . '", "year": "' . $row['year'] . '", "price": "' . $row['price'] . '", "details": ' . json_encode($details) . ', "images": ' . json_encode($images) . '}\'>';
-          echo '                <img src="' . $images[0] . '" alt="' . $row['title'] . '">';
-          echo '            </a>';
-          echo '        </figure>';
-          echo '        <div class="card-content">';
-          echo '            <div class="card-title-wrapper">';
-          echo '                <h3 class="h3 card-title"><a href="#">' . $row['title'] . '</a></h3>';
-          echo '                <data class="year" value="' . $row['year'] . '">' . $row['year'] . '</data>';
-          echo '            </div>';
-          echo '            <ul class="card-list">';
-          echo '                <li class="card-list-item"><ion-icon name="people-outline"></ion-icon><span class="card-item-text">' . $details[0] . '</span></li>';
-          echo '                <li class="card-list-item"><ion-icon name="flash-outline"></ion-icon><span class="card-item-text">' . $details[1] . '</span></li>';
-          echo '                <li class="card-list-item"><ion-icon name="speedometer-outline"></ion-icon><span class="card-item-text">' . $details[2] . '</span></li>';
-          echo '                <li class="card-list-item"><ion-icon name="hardware-chip-outline"></ion-icon><span class="card-item-text">' . $details[3] . '</span></li>';
-          echo '            </ul>';
-          echo '            <div class="card-price-wrapper">';
-          echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / ' . (strpos($row['price'], 'day') ? 'day' : 'month') . '</p>';
-          echo '                <button class="btn">Rent now</button>';
-          echo '            </div>';
-          echo '        </div>';
-          echo '    </div>';
-          echo '</li>';
-        }
-        ?>
-      </ul>
-    </div>
-    <div class="filter-section">
+      foreach ($cars as $row) {
+        $details = json_decode($row['details']);
+        $images = json_decode($row['images']);
+        $isBooked = $row['booking_status'] === 'booked';
+        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day', '/month'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
+        echo '    <div class="featured-car-card">';
+        echo '        <figure class="card-banner">';
+        echo '            <img src="' . $images[0] . '" alt="' . $row['title'] . '">';
+        echo '        </figure>';
+        echo '        <div class="card-content">';
+        echo '            <div class="card-title-wrapper">';
+        echo '                <h3 class="h3 card-title"><a href="#">' . $row['title'] . '</a></h3>';
+        echo '                <data class="year" value="' . $row['year'] . '">' . $row['year'] . '</data>';
+        echo '            </div>';
+        echo '            <ul class="card-list">';
+        echo '                <li class="card-list-item"><ion-icon name="people-outline"></ion-icon><span class="card-item-text">' . $details[0] . '</span></li>';
+        echo '                <li class="card-list-item"><ion-icon name="flash-outline"></ion-icon><span class="card-item-text">' . $details[1] . '</span></li>';
+        echo '                <li class="card-list-item"><ion-icon name="speedometer-outline"></ion-icon><span class="card-item-text">' . $details[2] . '</span></li>';
+        echo '                <li class="card-list-item"><ion-icon name="hardware-chip-outline"></ion-icon><span class="card-item-text">' . $details[3] . '</span></li>';
+        echo '            </ul>';
+        echo '            <div class="card-price-wrapper">';
+        echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / ' . (strpos($row['price'], 'day') ? 'day' : 'month') . '</p>';
+        if ($isBooked) {
+          echo '                <button class="btn booked-btn">Booked</button>';
+      } 
+      else {
+        echo '                <button class="btn car-link" data-car=\'{"id": "' . $row['car_id'] . '","title": "' . $row['title'] . '", "year": "' . $row['year'] . '", "price": "' . $row['price'] . '", "details": ' . json_encode($details) . ', "images": ' . json_encode($images) . '}\'>Rent now</button>';
+      }
+        echo '            </div>';
+        echo '        </div>';
+        echo '    </div>';
+        echo '</li>';
+      }
+    
+      ?>
+    </ul>
+  </div>
+  <div class="filter-section">
     <h3>Filter Cars</h3>
     <form id="filter-form">
       <div class="filter-group">
@@ -101,8 +109,8 @@
       <button type="button" onclick="applyFilters()">Apply Filters</button>
     </form>
   </div>
-  </section>
-  <script src="js/services.js"></script>
-  <?php include('footer.php'); ?>
+</section>
+<script src="js/services.js"></script>
+<?php include('footer.php'); ?>
 </body>
 </html>

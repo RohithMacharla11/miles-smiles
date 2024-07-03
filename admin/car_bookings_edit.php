@@ -4,85 +4,83 @@ include('includes/header.php');
 include('includes/navbar.php');
 ?>
 
-
 <div class="container-fluid">
-
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Edit User Profile</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Car Booking</h6>
         </div>
 
-
         <div class="card-body">
-
-            <?php if (isset($_POST['edit_btn'])) {
+            <?php if (isset($_POST['bedit_btn'])) {
                 $connection = mysqli_connect("localhost", "root", "", "car_users");
-                $cid = $_POST['edit_carid'];
-                $query = "SELECT * FROM cars WHERE car_id = '$cid'";
+                $username = $_POST['edit_bookingid'];
+                $query = "SELECT cd.username, cd.title, cd.price, c.license_number, b.booking_type, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.return_date, b.airport_type, b.booking_status
+                          FROM car_details cd 
+                          JOIN cars c ON cd.car_id = c.car_id
+                          JOIN bookings b ON cd.detail_id = b.car_details_id
+                          WHERE cd.username = '$username'";
                 $query_run = mysqli_query($connection, $query);
 
                 foreach ($query_run as $row) {
-                    foreach ($query_run as $row) {
-                        $details = isset($row['details']) ? json_decode($row['details'], true) : [];
-                        $images = isset($row['images']) ? json_decode($row['images'], true) : [];
-                    }
             ?>
-
-                    <form action = "acar_code.php" method="post">
-                        <input type="hidden" name="edit_carid" value="<?php echo $row['car_id'] ?>">
+                    <form action="car_bookings_code.php" method="post">
+                        <input type="hidden" name="edit_username" value="<?php echo $row['username'] ?>">
                         <div class="form-group">
-                            <label> Car Name </label>
-                            <input type="text" name="edit_carname" value="<?php echo $row['title'] ?>" class="form-control" placeholder="Enter Carname">
-                        </div>
-                        <div class="form-group">
-                            <label>Year</label>
-                            <input type="year" name="edit_year" value="<?php echo $row['year'] ?>" class="form-control" placeholder="Enter Year">
+                            <label>Car Title</label>
+                            <input type="text" name="edit_title" value="<?php echo $row['title'] ?>" class="form-control" placeholder="Enter Car Title">
                         </div>
                         <div class="form-group">
                             <label>Price</label>
-                            <input type="number"  name="edit_price" value="<?php echo $row['price'] ?>" class="form-control" placeholder="Enter Price">
-                        </div>
-                        <div class="form-group">
-                            <label>Details</label>
-                            <div id="details-group">
-                                <?php foreach ($details as $detail) { ?>
-                                    <input type="text" name="edit_details[]" value="<?php echo $detail; ?>" class="form-control" placeholder="Enter Detail">
-                                <?php } ?>
-                            </div>
-                            <button type="button" onclick="addDetail()">Add More Details</button>
-                        </div>
-                        <div class="form-group">
-                            <label>Images</label>
-                            <div id="images-group">
-                                <?php foreach ($images as $image) { ?>
-                                    <input type="text" name="edit_images[]" value="<?php echo $image; ?>" class="form-control" placeholder="Enter Image URL">
-                                <?php } ?>
-                            </div>
-                            <button type="button" onclick="addImage()">Add More Images</button>
+                            <input type="number" name="edit_price" value="<?php echo $row['price'] ?>" class="form-control" placeholder="Enter Price">
                         </div>
                         <div class="form-group">
                             <label>License Number</label>
-                            <input type="text"  name="edit_license_number" value="<?php echo $row['license_number'] ?>" class="form-control" placeholder="Enter license_number">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Owner Name</label>
-                            <input type="text"  name="edit_owner_name" value="<?php echo $row['car_owner'] ?>" class="form-control" placeholder="Enter owner_name">
+                            <input type="text" name="edit_license_number" value="<?php echo $row['license_number'] ?>" class="form-control" placeholder="Enter License Number">
                         </div>
                         <div class="form-group">
-                            <label>Car Status</label>
-                            <input type="text"  name="edit_car_status" value="<?php echo $row['car_status'] ?>" class="form-control" placeholder="Enter car_status">
+                            <label>Booking Type</label>
+                            <input type="text" name="edit_booking_type" value="<?php echo $row['booking_type'] ?>" class="form-control" placeholder="Enter Booking Type">
                         </div>
-                        <a href="active_cars.php" class="btn btn-danger"> CANCEL</a>
-                        <button type="submit" name="cupdatebtn" class="btn btn-primary"> Update</button>
+                        <div class="form-group">
+                            <label>Pickup Location</label>
+                            <input type="text" name="edit_pickup" value="<?php echo $row['pickup'] ?>" class="form-control" placeholder="Enter Pickup Location">
+                        </div>
+                        <div class="form-group">
+                            <label>Dropoff Location</label>
+                            <input type="text" name="edit_dropoff" value="<?php echo $row['dropoff'] ?>" class="form-control" placeholder="Enter Dropoff Location">
+                        </div>
+                        <div class="form-group">
+                            <label>Pickup Date</label>
+                            <input type="date" name="edit_pickup_date" value="<?php echo $row['pickup_date'] ?>" class="form-control" placeholder="Enter Pickup Date">
+                        </div>
+                        <div class="form-group">
+                            <label>Pickup Time</label>
+                            <input type="time" name="edit_pickup_time" value="<?php echo $row['pickup_time'] ?>" class="form-control" placeholder="Enter Pickup Time">
+                        </div>
+                        <div class="form-group">
+                            <label>Return Date</label>
+                            <input type="date" name="edit_return_date" value="<?php echo $row['return_date'] ?>" class="form-control" placeholder="Enter Return Date">
+                        </div>
+                        <div class="form-group">
+                            <label>Airport Type</label>
+                            <input type="text" name="edit_airport_type" value="<?php echo $row['airport_type'] ?>" class="form-control" placeholder="Enter Airport Type">
+                        </div>
+                        <div class="form-group">
+                            <label>Booking Status</label>
+                            <input type="text" name="edit_booking_status" value="<?php echo $row['booking_status'] ?>" class="form-control" placeholder="Enter Booking Status">
+                        </div>
+                        <a href="car_bookings.php" class="btn btn-danger">CANCEL</a>
+                        <button type="submit" name="bupdatebtn" class="btn btn-primary">Update</button>
                     </form>
             <?php
                 }
             }
             ?>
+        </div>
+    </div>
+</div>
 
-            <?php
-            include('includes/scripts.php');
-            include('includes/footer.php');
-            ?>
+<?php
+include('includes/scripts.php');
+include('includes/footer.php');
+?>

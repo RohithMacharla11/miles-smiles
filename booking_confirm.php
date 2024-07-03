@@ -1,12 +1,13 @@
 <?php 
-include('header.php'); 
-echo "Thanks for the booking";
-?>
-<?php
 include('config.php');
+
 session_start();
 
-// Assuming you have a way to get the current logged-in user's username
+if (!isset($_SESSION['username'])) {
+    echo "User not logged in.";
+    exit;
+}
+
 $currentUsername = $_SESSION['username'];
 
 // Fetch user details
@@ -41,65 +42,114 @@ echo 'var booking = ' . json_encode($booking) . ';';
 echo 'var car = ' . json_encode($carDetails) . ';';
 echo '</script>';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
+    <link rel= "stylesheet" href = "css/booking_confirm.css">
 </head>
 <body>
-    <button class="btn" id="rent-btn">Rent now</button>
+<div id="wrapper">
+    <div class="card">
+        <div class="icon"></div>
+        <h1>Your car is ready to book!</h1>
+        <p>Contact our team through WhatsApp for Booking Confirmation.</p>
+    </div>
+    <div class="card">
+        <ul>
+            <li><span>Car Name</span><span id="carName"><?php echo htmlspecialchars($carDetails['title']); ?></span></li>
+            <li><span>Booking Date</span><span id="bookingDate"><?php echo htmlspecialchars($carDetails['booking_date']); ?></span></li>
+            <li><span>Pickup Location</span><span id="pickupLocation"><?php echo htmlspecialchars($booking['pickup']); ?></span></li>
+            <li><span>Pickup Date</span><span id="pickupDate"><?php echo htmlspecialchars($booking['pickup_date']); ?></span></li>
+            <li><span>Pickup Time</span><span id="pickupTime"><?php echo htmlspecialchars($booking['pickup_time']); ?></span></li>
+            <li><span>No. of Days</span>
+                <span>
+                    <button onclick="decrementDays()">-</button>
+                    <input type="number" id="days" value="1" min="1" oninput="updateTotalAmount()">
+                    <button onclick="incrementDays()">+</button>
+                </span>
+            </li>
+            <li><span>Total Amount</span><span id="totalAmount">$<?php echo htmlspecialchars($carDetails['price']); ?></span></li>
+        </ul>
+    </div>
+    <div class="card">
+        <div class="cta-row">
+            <button class="secondary">Back to dashboard</button>
+            <button id="rent-btn">Rent now</button>
+        </div>
+    </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const rentNowButton = document.getElementById('rent-btn');
-            rentNowButton.addEventListener('click', redirectToWhatsApp);
-        });
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const pricePerDay = <?php echo $carDetails['price']; ?>;
+        document.getElementById("days").setAttribute("data-price", pricePerDay);
+        updateTotalAmount();
+    });
 
-        function redirectToWhatsApp() {
-            // Construct the WhatsApp message
-            const fullName = user.FullName;
-            const phone = user.Phone;
-            const email = user.EMail;
-            const bookingType = booking.booking_type;
-            const pickup = booking.pickup;
-            const dropoff = booking.dropoff;
-            const pickupDate = booking.pickup_date;
-            const pickupTime = booking.pickup_time;
-            const returnDate = booking.return_date;
-            const airportType = booking.airport_type;
-            const carName = car.title;
-            const carPrice = car.price;
-            const carDetails = car.car_details;
+    function updateTotalAmount() {
+        const days = parseInt(document.getElementById("days").value);
+        const pricePerDay = parseInt(document.getElementById("days").getAttribute("data-price"));
+        const totalAmount = days * pricePerDay;
+        document.getElementById("totalAmount").textContent = `$${totalAmount}`;
+    }
 
-            let message = `Thank You for renting a car\nName: ${fullName}\nPhone no: ${phone}\nEmail: ${email}\nBooking Details:\n`;
-            if (airportType) message += `AIRPORT TYPE: ${airportType}\n`;
-            message += `Pickup: ${pickup}\nDropoff: ${dropoff}\nPickup Date: ${pickupDate}\nPickup Time: ${pickupTime}\n`;
-            if (returnDate) message += `Return Date: ${returnDate}\n`;
-            message += `Car Details:\nCar Name: ${carName}\nCar Price: ${carPrice}\nCar Details: ${carDetails}`;
+    function incrementDays() {
+        const daysInput = document.getElementById("days");
+        let days = parseInt(daysInput.value);
+        daysInput.value = ++days;
+        updateTotalAmount();
+    }
 
-            // Encode the message for use in a URL
-            const encodedMessage = encodeURIComponent(message);
-
-            // Construct the WhatsApp URL
-            const whatsappURL = `https://wa.me/917989481578?text=${encodedMessage}`;
-
-            // Open WhatsApp in a new tab
-            const whatsappWindow = window.open(whatsappURL, '_blank');
-
-            // Redirect current tab to home.php
-            if (whatsappWindow) {
-                // Close the current tab after 2 seconds (adjust as needed)
-                setTimeout(function() {
-                    window.location.href = 'home.php';
-                }, 2000); // Redirect after 2 seconds
-            } else {
-                // Handle if the pop-up blocker prevents opening the new tab
-                alert('Please allow pop-ups to open WhatsApp.');
-                window.location.href = 'home.php'; // Redirect immediately if new tab fails to open
-            }
+    function decrementDays() {
+        const daysInput = document.getElementById("days");
+        let days = parseInt(daysInput.value);
+        if (days > 1) {
+            daysInput.value = --days;
+            updateTotalAmount();
         }
-    </script>
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const rentNowButton = document.getElementById('rent-btn');
+        rentNowButton.addEventListener('click', redirectToWhatsApp);
+    });
+
+    function redirectToWhatsApp() {
+        const fullName = user.FullName;
+        const phone = user.Phone;
+        const email = user.EMail;
+        const pickup = booking.pickup;
+        const pickupDate = booking.pickup_date;
+        const pickupTime = booking.pickup_time;
+        const returnDate = booking.return_date;
+        const airportType = booking.airport_type;
+        const carName = car.title;
+        const carPrice = car.price;
+        const carDetails = car.car_details;
+
+        let message = `Thank You for renting a car\nName: ${fullName}\nPhone no: ${phone}\nEmail: ${email}\nBooking Details:\n`;
+        if (airportType) message += `AIRPORT TYPE: ${airportType}\n`;
+        message += `Pickup: ${pickup}\nDropoff: ${booking.dropoff}\nPickup Date: ${pickupDate}\nPickup Time: ${pickupTime}\n`;
+        if (returnDate) message += `Return Date: ${returnDate}\n`;
+        message += `Car Details:\nCar Name: ${carName}\nCar Price: ${carPrice}\nCar Details: ${carDetails}`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappURL = `https://wa.me/917989481578?text=${encodedMessage}`;
+        const whatsappWindow = window.open(whatsappURL, '_blank');
+
+        // if (whatsappWindow) {
+        //     setTimeout(function() {
+        //         window.location.href = 'home.php';
+        //     }, 2000); 
+        // } else {
+        //     alert('Please allow pop-ups to open WhatsApp.');
+        //     window.location.href = 'home.php';
+        // }
+    }
+</script>
 </body>
 </html>

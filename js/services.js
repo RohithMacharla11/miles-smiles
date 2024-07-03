@@ -51,7 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       const carData = JSON.parse(link.getAttribute('data-car'));
       sessionStorage.setItem('selectedCar', JSON.stringify(carData));
-      window.location.href = link.href;
+      window.location.href = 'details.php';
     });
   });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+const bookedBtns = document.querySelectorAll('.booked-btn');
+bookedBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    alert('This car is already booked.');
+  });
+});
 });
