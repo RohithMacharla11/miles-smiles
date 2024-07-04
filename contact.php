@@ -32,49 +32,50 @@
       </div>
     </div>
   </div>
-  <div class="phone">
-    <div class="icon-container">
-      <a href="#"><i class="fa-solid fa-phone"></i></a>
-    </div>
-    <div class="text-container">
-      <p>Speak to our Customer Care <br>Representative at +91 7418529630</p>
-    </div>
-  </div>
-
-  <!--IMAGE----------------------------->
-  <!-- <section class="et-section et-section--grey-background et-section--no-padding-xs">
-    <div class="et-section__wrapper">
-        <div class="et-featured-review">
-            <picture class="et-featured-review__image-wrapper">
-                <source media="(min-width: 900px)"
-                        srcset="https://cdn.easyterra.com/images/themes/autohuren/featured-review.jpg 1x,
-                                https://cdn.easyterra.com/images/themes/autohuren/featured-review@2x.jpg 2x">
-                <img src="https://cdn.easyterra.com/images/themes/autohuren/featured-review.jpg"
-                     alt=""
-                     class="et-featured-review__image"
-                     style="content-visibility: auto"
-                     decoding="async"
-                     loading="lazy"
-                     height="400"
-                     width="569">
-            </picture>
-            <div class="et-featured-review__content">
-                <div class="et-featured-review__label">Customer experience</div>
-                <div class="et-featured-review__title" >Good and reliable company for renting a car abroad</div>
-                <div class="et-featured-review__text">Easy website, easy phone contact when I had questions. Everything well-organized. Friendly staff. Have rented a car through this company several times and have always been very satisfied.</div>
-                <div class="et-featured-review__footer"></div>
+  <section class="contact-section2">
+        <h2 style="font-size: 40px;">Get In Touch With Us</h2><br>
+        <p class="contact-description">
+            For who thoroughly her boy estimating conviction.
+            Removed demands expense account in outward tedious do. Particular way thoroughly.
+        </p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="fa-solid fa-phone" style="font-size: larger;">
+                <h3 style="margin-top: 5px;">Office Phone Number</h3>
+                </div>
+                
+                <p>+91 7780598470</p>
+            </div>
+            <div class="contact-item">
+            <div class="fa-solid fa-map-location-dot"style="font-size: larger;">
+                <h3 style="margin-top: 5px;">Company Office Address</h3>
+                </div>
+               
+                <p>969 Pine Street Grand Rapids, MI 49503</p>
+                
+            </div>
+            <div class="contact-item">
+                <div class="fa-solid fa-envelope" style="font-size: larger;">
+                    <h3 style="margin-top: 5px;">Office Email Address</h3>
+                </div>
+                <p>carrental@gmail.com</p>
             </div>
         </div>
+    </section>
+
+  <div class="contact-section">
+        <div class="contact-image"></div>
+        <div class="contact-form">
+            <h2>Write Us</h2>
+            <p>As a passionate explorer of the intersection between technology, art, and the natural world, I've embarked on a journey to unravel the fascinating connections that weave.</p>
+            <form action="submit_form.php" method="post">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
     </div>
-</section>
-   -->
-  
-  <!-- footer menu------------------->
-   <div class="footmeanu">
-   <div><p style="font-weight: 800;font-size: 24px;">Platform &nbsp;
-    <a style="font-size: 18px" href="#">Sign up free</a>&nbsp; <a style="font-size: 18px" href="#">Pricing</a></p>
-  </div>
-   </div>
 
 
 </body>

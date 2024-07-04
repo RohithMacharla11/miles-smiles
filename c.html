@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        
+        .contact-section {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .contact-image {
+            flex: 1;
+            background-image: url('css/images/contact.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .contact-form {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .contact-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333333;
+        }
+        .contact-form p {
+            margin-bottom: 20px;
+            color: #666666;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff5c5c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #e04e4e;
+        }
+        textarea {
+            resize: vertical; /* user can resize vertically, but width is fixed */
+          }
+    </style>
+</head>
+<body>
+    <div class="contact-section">
+        <div class="contact-image"></div>
+        <div class="contact-form">
+            <h2>Write Us</h2>
+            <p>As a passionate explorer of the intersection between technology, art, and the natural world, I've embarked on a journey to unravel the fascinating connections that weave.</p>
+            <form action="submit_form.php" method="post">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

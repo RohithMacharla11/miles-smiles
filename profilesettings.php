@@ -4,7 +4,7 @@ include('config.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header('Location: signin.php');
+    header('Location: login.php');
     exit();
 }
 
@@ -41,8 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Update session variables
     $_SESSION['profile_photo'] = $profile_photo;
-
-    echo "Profile updated successfully!";
 }
 ?>
 

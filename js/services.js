@@ -15,13 +15,13 @@ function applyFilters() {
     if (brandFilter !== 'all' && brand !== brandFilter) {
       show = false;
     }
-    if (priceFilter === 'low' && price < 6000) {
+    if (priceFilter === 'low' && price > 6000) {
       show = false;
     }
-    if (priceFilter === 'mid' && (price > 6000 || price < 9000)) {
+    if (priceFilter === 'mid' && (price < 6000 || price > 9000)) {
       show = false;
     }
-    if (priceFilter === 'high' && price > 9000) {
+    if (priceFilter === 'high' && price < 9000) {
       show = false;
     }
     if (acFilter !== 'all' && ac !== acFilter) {

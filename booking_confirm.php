@@ -72,7 +72,7 @@ echo '</script>';
                     <button onclick="incrementDays()">+</button>
                 </span>
             </li>
-            <li><span>Total Amount</span><span id="totalAmount">$<?php echo htmlspecialchars($carDetails['price']); ?></span></li>
+            <li><span>Total Amount</span><span id="totalAmount">₹<?php echo htmlspecialchars($carDetails['price']); ?></span></li>
         </ul>
     </div>
     <div class="card">
@@ -94,7 +94,7 @@ echo '</script>';
         const days = parseInt(document.getElementById("days").value);
         const pricePerDay = parseInt(document.getElementById("days").getAttribute("data-price"));
         const totalAmount = days * pricePerDay;
-        document.getElementById("totalAmount").textContent = `$${totalAmount}`;
+        document.getElementById("totalAmount").textContent = `₹${totalAmount}`;
     }
 
     function incrementDays() {

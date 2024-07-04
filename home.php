@@ -165,93 +165,94 @@ Dive into our curated guides and insider tips to uncover hidden gems, scenic vie
         <img src="css/images/hindustan logo.png" alt="hindustan-logo"></li>
     </ul>
 </div>
-
+<?php include('footer.php');?>
 <!--======================================================================================================-->
 
 <script>
+    function setMinDate() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('pickup-date').setAttribute('min', today);
+        document.getElementById('return-date').setAttribute('min', today);
+    }
 
-        function showOneWay(event) {
-            hideAllGroups();
-            document.getElementById('from-group').style.display = 'block';
-            document.getElementById('to-group').style.display = 'block';
-            document.getElementById('pickup-date-group').style.display = 'block';
-            document.getElementById('pickup-time-group').style.display = 'block';
-            // event.target.classList.add('active');
-            setActiveButton(event.target);
-            document.getElementById('explore-button').disabled = false;
-            console.log("One way selected");
-        }
+    function showOneWay(event) {
+        hideAllGroups();
+        document.getElementById('from-group').style.display = 'block';
+        document.getElementById('to-group').style.display = 'block';
+        document.getElementById('pickup-date-group').style.display = 'block';
+        document.getElementById('pickup-time-group').style.display = 'block';
+        setActiveButton(event.target);
+        document.getElementById('explore-button').disabled = false;
+        console.log("One way selected");
+    }
 
-        function showRoundTrip(event) {
-            hideAllGroups();
-            document.getElementById('from-group').style.display = 'block';
-            document.getElementById('to-group').style.display = 'block';
-            document.getElementById('pickup-date-group').style.display = 'block';
-            document.getElementById('return-date-group').style.display = 'block';
-            document.getElementById('pickup-time-group').style.display = 'block';
-            //event.target.classList.add('active');
-            setActiveButton(event.target);
-            document.getElementById('explore-button').disabled = false;
-            console.log("Round Trip selected");
-        }
+    function showRoundTrip(event) {
+        hideAllGroups();
+        document.getElementById('from-group').style.display = 'block';
+        document.getElementById('to-group').style.display = 'block';
+        document.getElementById('pickup-date-group').style.display = 'block';
+        document.getElementById('return-date-group').style.display = 'block';
+        document.getElementById('pickup-time-group').style.display = 'block';
+        setActiveButton(event.target);
+        document.getElementById('explore-button').disabled = false;
+        console.log("Round Trip selected");
+    }
 
-        function showLocal(event) {
-            hideAllGroups();
-            document.getElementById('city-group').style.display = 'block';
-            document.getElementById('pickup-date-group').style.display = 'block';
-            document.getElementById('pickup-time-group').style.display = 'block';
-            //event.target.classList.add('active');
-            setActiveButton(event.target);
-            document.getElementById('explore-button').disabled = false;
-            console.log("Local selected");
-        }
+    function showLocal(event) {
+        hideAllGroups();
+        document.getElementById('city-group').style.display = 'block';
+        document.getElementById('pickup-date-group').style.display = 'block';
+        document.getElementById('pickup-time-group').style.display = 'block';
+        setActiveButton(event.target);
+        document.getElementById('explore-button').disabled = false;
+        console.log("Local selected");
+    }
 
-        function showAirport(event) {
-            hideAllGroups();
-            document.getElementById('airport-type-group').style.display = 'block';
-            document.getElementById('city-group').style.display = 'block';
-            document.getElementById('pickup-date-group').style.display = 'block';
-            document.getElementById('pickup-time-group').style.display = 'block';
-            //event.target.classList.add('active');
-            setActiveButton(event.target);
-            document.getElementById('explore-button').disabled = false;
-            console.log("Airport selected");
-        }
+    function showAirport(event) {
+        hideAllGroups();
+        document.getElementById('airport-type-group').style.display = 'block';
+        document.getElementById('city-group').style.display = 'block';
+        document.getElementById('pickup-date-group').style.display = 'block';
+        document.getElementById('pickup-time-group').style.display = 'block';
+        setActiveButton(event.target);
+        document.getElementById('explore-button').disabled = false;
+        console.log("Airport selected");
+    }
 
-        function hideAllGroups() {
-            document.getElementById('from-group').style.display = 'none';
-            document.getElementById('to-group').style.display = 'none';
-            document.getElementById('city-group').style.display = 'none';
-            document.getElementById('pickup-date-group').style.display = 'none';
-            document.getElementById('return-date-group').style.display = 'none';
-            document.getElementById('pickup-time-group').style.display = 'none';
-            document.getElementById('airport-type-group').style.display = 'none';
+    function hideAllGroups() {
+        document.getElementById('from-group').style.display = 'none';
+        document.getElementById('to-group').style.display = 'none';
+        document.getElementById('city-group').style.display = 'none';
+        document.getElementById('pickup-date-group').style.display = 'none';
+        document.getElementById('return-date-group').style.display = 'none';
+        document.getElementById('pickup-time-group').style.display = 'none';
+        document.getElementById('airport-type-group').style.display = 'none';
 
-            const buttons = document.querySelectorAll('.booking-options button');
-            buttons.forEach(button => button.classList.remove('active'));
-        }
+        const buttons = document.querySelectorAll('.booking-options button');
+        buttons.forEach(button => button.classList.remove('active'));
+    }
 
-
-        function setActiveButton(button) {
+    function setActiveButton(button) {
         document.querySelectorAll('.booking-options button').forEach(btn => {
             btn.classList.remove('active');
         });
         button.classList.add('active');
-        }
-        function validateForm() {
-            const bookingType = document.querySelector('.booking-options .active').innerText;
+    }
 
-            if (bookingType === 'One Way' || bookingType === 'Round Trip') {
-                return document.getElementById('from').value && document.getElementById('to').value;
-            } else if (bookingType === 'Local') {
-                return document.getElementById('city').value;
-            } else if (bookingType === 'Airport') {
-                return document.getElementById('city').value && document.getElementById('airport-type').value;
-            }
-            return false;
-        }
+    function validateForm() {
+        const bookingType = document.querySelector('.booking-options .active').innerText;
 
-        function handleExploreClick() {
+        if (bookingType === 'One Way' || bookingType === 'Round Trip') {
+            return document.getElementById('from').value && document.getElementById('to').value;
+        } else if (bookingType === 'Local') {
+            return document.getElementById('city').value;
+        } else if (bookingType === 'Airport') {
+            return document.getElementById('city').value && document.getElementById('airport-type').value;
+        }
+        return false;
+    }
+
+    function handleExploreClick() {
         if (!validateForm()) {
             alert('Please fill out all required fields.');
             return;
@@ -285,15 +286,15 @@ Dive into our curated guides and insider tips to uncover hidden gems, scenic vie
         document.getElementById('bookingForm').submit();
     }
 
-        //For auto clicking any button
-        window.onload = function() {
-            // Trigger click on the "One Way" button
-            document.querySelector('.booking-options button:nth-child(1)').click(); // This targets the first button (One Way)
-        };
+    window.onload = function() {
+        // Trigger click on the "One Way" button
+        document.querySelector('.booking-options button:nth-child(1)').click(); // This targets the first button (One Way)
+        setMinDate(); // Set the minimum date when the page loads
+    };
 </script>
 
+
     <form id="bookingForm" action="bookings.php" method="post">
-        <input type="hidden" name="id" id="id">
         <input type="hidden" name="booking_type" id="booking_type">
         <input type="hidden" name="pickup" id="pickup">
         <input type="hidden" name="dropoff" id="dropoff">
@@ -310,5 +311,3 @@ Dive into our curated guides and insider tips to uncover hidden gems, scenic vie
 
 </body>
 </html>
-
-<?php include('footer.php'); ?>
