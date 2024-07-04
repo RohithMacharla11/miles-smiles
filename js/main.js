@@ -19,3 +19,8 @@ toggle.onclick = function () {
   navigation.classList.toggle("active");
   main.classList.toggle("active");
 };
+
+// Debugging: Check if "CAR RENTAL" link is clickable
+document.querySelector('.navigation a[href="home.php"]').addEventListener('click', function(event) {
+  console.log('CAR RENTAL link clicked');
+});

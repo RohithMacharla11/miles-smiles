@@ -77,7 +77,7 @@ echo '</script>';
     </div>
     <div class="card">
         <div class="cta-row">
-            <button class="secondary">Back to dashboard</button>
+        <button class="secondary" onclick="window.location.href='home.php'">Back to dashboard</button>
             <button id="rent-btn">Rent now</button>
         </div>
     </div>

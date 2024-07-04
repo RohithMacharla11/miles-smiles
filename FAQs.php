@@ -108,9 +108,7 @@ The additional driver must also meet the car hire company's rental requirements.
             </div>
           </div>
 </div>
-<div class="footer">
-  <p>&copy; 2024 Company Name. All rights reserved.</p>
-</div>
+x
 <script>
 function toggleAnswer(btn) {
   var answer = btn.parentNode.nextElementSibling;
@@ -126,3 +124,5 @@ function toggleAnswer(btn) {
 
 </body>
 </html>
+
+<?php include('footer.php'); ?>

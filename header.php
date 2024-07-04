@@ -23,7 +23,7 @@ session_start();
                 <div class="dropdown">
                    <a href="#">Hi, <?php echo $_SESSION['username']; ?></a> 
                     <div class="dropdown-content">
-                       <a href="profile.php">Profile</a> 
+                       <a href="profilesettings.php">Profile</a> 
                           <a href="logout.php">Logout</a> 
                     </div>
                 </div>

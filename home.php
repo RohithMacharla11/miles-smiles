@@ -310,3 +310,5 @@ Dive into our curated guides and insider tips to uncover hidden gems, scenic vie
 
 </body>
 </html>
+
+<?php include('footer.php'); ?>

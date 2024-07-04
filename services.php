@@ -33,7 +33,7 @@
         $details = json_decode($row['details']);
         $images = json_decode($row['images']);
         $isBooked = $row['booking_status'] === 'booked';
-        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day', '/month'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
+        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
         echo '    <div class="featured-car-card">';
         echo '        <figure class="card-banner">';
         echo '            <img src="' . $images[0] . '" alt="' . $row['title'] . '">';
@@ -50,7 +50,7 @@
         echo '                <li class="card-list-item"><ion-icon name="hardware-chip-outline"></ion-icon><span class="card-item-text">' . $details[3] . '</span></li>';
         echo '            </ul>';
         echo '            <div class="card-price-wrapper">';
-        echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / ' . (strpos($row['price'], 'day') ? 'day' : 'month') . '</p>';
+        echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / ' . (strpos($row['price'], 'day') ? 'day' : 'day') . '</p>';
         if ($isBooked) {
           echo '                <button class="btn booked-btn">Booked</button>';
       } 
@@ -73,20 +73,23 @@
         <label for="brand">Brand</label>
         <select id="brand" name="brand">
           <option value="all">All</option>
-          <option value="toyota">Toyota</option>
-          <option value="audi">Audi</option>
-          <option value="suzuki">Suzuki</option>
+          <option value="honda">Honda</option>
+          <option value="ford">Ford</option>
+          <option value="tesla">Tesla</option>
           <option value="bmw">BMW</option>
           <option value="mercedes">Mercedes</option>
+          <option value="chevrolet">Chevrolet</option>
+          <option value="nissan">Nissan</option>
+          <option value="hyundai">Hyundai</option>
         </select>
       </div>
       <div class="filter-group">
         <label for="price">Price</label>
         <select id="price" name="price">
           <option value="all">All</option>
-          <option value="low">Below ₹15000</option>
-          <option value="mid">₹15000 - ₹20000</option>
-          <option value="high">Above ₹20000</option>
+          <option value="low">Below ₹6000</option>
+          <option value="mid">₹6000 - ₹9000</option>
+          <option value="high">Above ₹9000</option>
         </select>
       </div>
       <div class="filter-group">

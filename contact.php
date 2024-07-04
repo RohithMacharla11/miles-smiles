@@ -76,9 +76,8 @@
   </div>
    </div>
 
-<!-- ---------------------footerrrr-->
-  <div class="footer">
-    <p>&copy; 2024 Company Name. All rights reserved.</p>
-</div>
+
 </body>
 </html>
+
+<?php include('footer.php'); ?>

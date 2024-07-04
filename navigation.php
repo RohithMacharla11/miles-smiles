@@ -17,12 +17,12 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <!-- <a href="#">
-                        <span class="icon">
-                            <!-- <ion-icon name="logo-apple"></ion-icon> -->
-                        <!-- </span>
-                        <span class="title">Car Rental</span>
-                    </a> -->
+                    <a href="home.php">
+                        <span class="icon" >
+                        <i class="fa-solid fa-car"></i>
+                        </span>
+                        <span class="title">CAR RENTAL</span>
+                    </a>
                 </li>
                 <li>
                     <a href="profilesettings.php">

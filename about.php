@@ -40,9 +40,7 @@
 
 
 
-<div class="footer">
-  <p>&copy; 2024 Company Name. All rights reserved.</p>
-</div>
+<?php include('footer.php'); ?>
 </body>
 </html>
 
