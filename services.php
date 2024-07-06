@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Car Rental</title>
   <link rel="stylesheet" href="css/services.css">
+  <script src="https://kit.fontawesome.com/8954b3c36f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
 </head>
 <body>
   
@@ -44,7 +46,7 @@
         echo '                <data class="year" value="' . $row['year'] . '">' . $row['year'] . '</data>';
         echo '            </div>';
         echo '            <ul class="card-list">';
-        echo '                <li class="card-list-item"><ion-icon name="people-outline"></ion-icon><span class="card-item-text">' . $details[0] . '</span></li>';
+        echo '                <li class="card-list-item"><i class="fa-solid fa-headset"></i><span class="card-item-text">' . $details[0] . '</span></li>';
         echo '                <li class="card-list-item"><ion-icon name="flash-outline"></ion-icon><span class="card-item-text">' . $details[1] . '</span></li>';
         echo '                <li class="card-list-item"><ion-icon name="speedometer-outline"></ion-icon><span class="card-item-text">' . $details[2] . '</span></li>';
         echo '                <li class="card-list-item"><ion-icon name="hardware-chip-outline"></ion-icon><span class="card-item-text">' . $details[3] . '</span></li>';

@@ -65,45 +65,57 @@
     </div>
   </section>
 
-
   <?php
-if(!empty($_POST["send"])) {
-	$userName = $_POST["userName"];
-  $userEmail = $_POST["userEmail"];
-	$userPhone = $_POST["userPhone"];
-	$userMessage = $_POST["userMessage"];
-	$toEmail = "macharlarohith111@gmail.com";
-  
-	$mailHeaders = "Name: " . $userName .
-	"\r\n Email: ". $userEmail  . 
-	"\r\n Phone: ". $userPhone  . 
-	"\r\n Message: " . $userMessage . "\r\n";
+  // if (!empty($_POST["send"])) {
+  //     $userName = $_POST["userName"];
+  //     $userEmail = $_POST["userEmail"];
+  //     $userPhone = $_POST["userPhone"];
+  //     $userMessage = $_POST["userMessage"];
+  //     $toEmail = "macharlarohith111@gmail.com";
 
-	if(mail($toEmail, $userName, $mailHeaders)) {
-	    $message = "Your contact information is received successfully.";
-	}
-}
-?>
+  //     $subject = "Contact Form Submission from " . $userName;
+  //     $mailHeaders = "From: " . $userEmail . "\r\n" .
+  //                    "Reply-To: " . $userEmail . "\r\n" .
+  //                    "Content-type: text/plain; charset=UTF-8\r\n";
+  //     $mailBody = "Name: " . $userName . "\r\n" .
+  //                 "Email: " . $userEmail . "\r\n" .
+  //                 "Phone: " . $userPhone . "\r\n" .
+  //                 "Message: " . $userMessage . "\r\n";
+
+  //     if (mail($toEmail, $subject, $mailBody, $mailHeaders)) {
+  //         $message = "Your contact information is received successfully.";
+  //     } else {
+  //         $message = "Failed to send email. Please try again later.";
+  //         $error = error_get_last()['message'];
+  //         echo "<div class='error'><strong>Error: $error</strong></div>";
+  //     }
+  // }  
+
+  ?>
+  <!-- <input type="hidden" name="access_key" value="e5a5e422-44ab-4d81-9b94-57e322a76fcd"> -->
+  <!-- <form name="contactFormEmail" action="https://api.web3forms.com/submit" method="post"> -->
   <div class="contact-section">
     <div class="contact-image"></div>
     <div class="contact-form">
       <h2>Write Us</h2>
       <p>As a passionate explorer of the intersection between technology, art, and the natural world, I've embarked on a journey to unravel the fascinating connections that weave.</p>
-      <form name="contactFormEmail" method="post">
+
+      <!-- <form name="contactFormEmail" action="sendmail.php" method="post"> -->
+      <form name="contactFormEmail" action="https://api.web3forms.com/submit" method="post">
+        <input type="hidden" name="access_key" value="e5a5e422-44ab-4d81-9b94-57e322a76fcd">
         <input type="text" name="userName" id="userName" placeholder="Name" required>
         <input type="email" name="userEmail" placeholder="Email" id="userEmail" required>
         <input type="text" name="userPhone" placeholder="Phone Number" id="userPhone" required>
         <textarea name="userMessage" placeholder="Message" id="userMessage" required></textarea>
         <button type="submit" name="send" value="Submit">Send</button>
-        <?php if (! empty($message)) {?>
-      <div class='success'>
-        <strong><?php echo $message; ?>	</strong>
-      </div>
-      <?php } ?>
+        <?php if (!empty($message)) { ?>
+          <div class='success'>
+            <strong><?php echo $message; ?></strong>
+          </div>
+        <?php } ?>
       </form>
     </div>
   </div>
-
 
 </body>
 

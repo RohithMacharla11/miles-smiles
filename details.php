@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Car Details</title>
   <link rel="stylesheet" href="css/details.css">
+  
+  <script src="https://kit.fontawesome.com/8954b3c36f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
 </head>
 
 <body>
@@ -23,7 +26,14 @@
         <span id="total-ratings">(0 ratings)</span>
       </div>
       <p><strong>Year:</strong> <span id="car-year"></span></p>
-      <div id="car-details"></div>
+      <div id="car-details">
+        <ul class="card-list">
+          <li class="card-list-item"><i class="fa-solid fa-headset"></i><span class="card-item-text" id="car-seating"></span></li>
+          <li class="card-list-item"><i class="fa-solid fa-headset"></i><span class="card-item-text" id="car-engine"></span></li>
+          <li class="card-list-item"><i class="fa-solid fa-headset"></i></ion-icon><span class="card-item-text" id="car-speed"></span></li>
+          <li class="card-list-item"><i class="fa-solid fa-headset"></i></ion-icon><span class="card-item-text" id="car-transmission"></span></li>
+        </ul>
+      </div>
       <p class="price" id="car-price"></p>
       <button class="btn" id="rent_btn">Rent now</button>
     </div>
@@ -58,7 +68,7 @@
   </div>
 
   <form id="bookingForm" action="save_booking.php" method="post">
-    <input type="hidded" name="detail_id" id="detail-id">
+    <input type="hidden" name="detail_id" id="detail-id">
     <input type="hidden" name="car_id" id="car-id">
     <input type="hidden" name="title" id="car-title-hidden">
     <input type="hidden" name="year" id="car-year-hidden">
@@ -73,7 +83,5 @@
 </body>
 
 </html>
-
-
 
 <?php include('footer.php'); ?>

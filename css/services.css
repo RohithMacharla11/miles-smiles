@@ -3,7 +3,7 @@
 /* Filter section styling */
 /* Filter section styling */
 .filter-section {
-  position: fixed;
+  position: relative;
   margin-top: 70px;
   border-radius: 10px;
   right: 10px;
