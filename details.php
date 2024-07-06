@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Car Details</title>
   <link rel="stylesheet" href="css/details.css">
 </head>
+
 <body>
-  <?php include('header.php'); 
-    if(!isset($_SESSION["username"])){
-      header("signin.php");
-    }
+  <?php include('header.php');
+  if (!isset($_SESSION["username"])) {
+    header("signin.php");
+  }
   ?>
 
   <div class="car-details">
@@ -56,7 +58,7 @@
   </div>
 
   <form id="bookingForm" action="save_booking.php" method="post">
-    <input type = "hidded" name = "detail_id" id = "detail-id">
+    <input type="hidded" name="detail_id" id="detail-id">
     <input type="hidden" name="car_id" id="car-id">
     <input type="hidden" name="title" id="car-title-hidden">
     <input type="hidden" name="year" id="car-year-hidden">
@@ -69,6 +71,7 @@
 
   <script src="js/details.js"></script>
 </body>
+
 </html>
 
 

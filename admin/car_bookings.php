@@ -16,14 +16,14 @@ include('includes/navbar.php');
 
     <div class="card-body">
 
-      <?php
+    <?php
       if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-        //echo '<h2 class="bg-primary> ' .$_SESSION['success']. ' </h2>';
+        echo '<h3 style="color:green"> ' .$_SESSION['success']. ' </h2>';
         unset($_SESSION['success']);
       }
 
       if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-        //echo '<h2 class="bg-danger"> ' .$_SESSION['status']. ' </h2>';
+        echo '<h3 style="color:red"> ' .$_SESSION['status']. ' </h3>';
         unset($_SESSION['status']);
       }
       ?>
@@ -32,7 +32,7 @@ include('includes/navbar.php');
       <?php
 $connection = mysqli_connect("localhost", "root", "", "car_users");
 
-$query = "SELECT cd.username, cd.title, cd.price, c.license_number, b.booking_type, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.return_date, b.airport_type, b.booking_status 
+$query = "SELECT cd.admin_username, cd.title, cd.price, c.license_number, b.booking_type, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.return_date, b.airport_type, b.booking_status 
           FROM car_details cd 
           JOIN cars c ON cd.car_id = c.car_id
           JOIN bookings b ON cd.detail_id = b.car_details_id";
@@ -63,7 +63,7 @@ $query_run = mysqli_query($connection, $query);
       while ($row = mysqli_fetch_assoc($query_run)) {
     ?>
         <tr>
-          <td><?php echo $row['username']; ?></td>
+          <td><?php echo $row['admin_username']; ?></td>
           <td><?php echo $row['title']; ?></td>
           <td><?php echo $row['price']; ?></td>
           <td><?php echo $row['license_number']; ?></td>
@@ -77,7 +77,7 @@ $query_run = mysqli_query($connection, $query);
           <td><?php echo $row['booking_status']; ?></td>
           <td>
             <form action="car_bookings_edit.php" method="post">
-              <input type="hidden" name="edit_bookingid" value="<?php echo $row['username']; ?>">
+              <input type="hidden" name="edit_bookingid" value="<?php echo $row['admin_username']; ?>">
               <button type="submit" name="bedit_btn" class="btn btn-success">EDIT</button>
             </form>
           </td>

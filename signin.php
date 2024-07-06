@@ -1,70 +1,96 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-<meta charset="UTF-8">
-<title>Login/Registration</title>
-<link rel="stylesheet" href="css/login.css">
-<script type="text/javascript">
-    function preventBack(){window.history.forward()};
-    setTimeout("preventBack()",0);
-        window.onunload=function(){null;}
-</script>
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<div id="container">
-<!-- Cover Box -->
-<div id="cover">
-<!-- Sign Up Section -->
-<h1 class="sign-up">Hello, Friend!</h1>
-<p class="sign-up">Enter your personal details<br> and start a journey with us</p>
-<a class="button sign-up" href="#cover">Sign Up</a>
-<!-- Sign In Section -->
-<h1 class="sign-in">Welcome Back!</h1>
-<p class="sign-in">To keep connected with us please<br> login with your personal info</p>
-<br>
-<a class="button sub sign-in" href="#">Sign In</a>
-</div>
-<!-- Login Box -->
-<div id="login">
-<h1>Sign In</h1>
-<a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/59/59439.png"></a>
-<a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/49/49026.png"></a>
-<a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/34/34227.png"></a>
-<p>or use your email account:</p>
-<form action="login.php" method="post">
-    <input type="text" name="username" autocomplete="off"  placeholder="Username" required />
-    <input type="password" name="password" autocomplete="off"  placeholder="Password" required /><br>
-    <a href="#">Forgot password?</a><br>
-    <input type="submit" class = "submit-btn" name="login" value="Login" />
-</form>
-</div>
-<!-- Register Box -->
-<div id="register">
-<h1>Create Account</h1>
-<a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/59/59439.png"></a>
-<a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/49/49026.png"></a>
-<a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/34/34227.png"></a>
-<p>or use your email for registration:</p>
-<form action="register.php" method="post">
-    <input type="text" name="fullname" placeholder="Full name" required />
-    <input type="text" name="username" autocomplete="off" placeholder="Username" required />
-    <input type="email" name="email" placeholder="Email address" required />
-    <input type="text" name="phone" placeholder="Phone" required />
-    <input type="password" name="password" autocomplete="on" placeholder="Password" required />
-    <div class="checkbox">
-        <input type="checkbox" id="signupCheck" required />
-        <label for="signupCheck">I accept all terms & conditions</label>
-    </div>
-    <input type="submit" class="submit-btn" name="signup" value="Signup" />
-</form>
-</div>
-</div> <!-- END Container -->
-<!-- partial -->
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Login/Registration</title>
+    <link rel="stylesheet" href="css/login.css">
+    <!-- <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null; }
+    </script> -->
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div id="container">
+        <!-- Cover Box -->
+        <div id="cover">
+            <!-- Sign Up Section -->
+            <h1 class="sign-up">Hello, Friend!</h1>
+            <p class="sign-up">Enter your personal details<br> and start a journey with us</p>
+            <a class="button sign-up" href="#cover">Sign Up</a>
+            <!-- Sign In Section -->
+            <h1 class="sign-in">Welcome Back!</h1>
+            <p class="sign-in">To keep connected with us please<br> login with your personal info</p>
+            <br>
+            <a class="button sub sign-in" href="#">Sign In</a>
+        </div>
+        <!-- Login Box -->
+        <div id="login">
+            <h1>Sign In</h1>
+            <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/59/59439.png"></a>
+            <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/49/49026.png"></a>
+            <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/34/34227.png"></a>
+            <p>or use your email account:</p>
+            <form action="login.php" method="post">
+                <input type="text" name="username" autocomplete="off" placeholder="Username" required />
+                <input type="password" name="password" autocomplete="off" placeholder="Password" required /><br>
+                <a href="#">Forgot password?</a><br>
+                <input type="submit" class="submit-btn" name="login" value="Login" />
+            </form>
+        </div>
+        <!-- Register Box -->
+        <div id="register">
+            <h1>Create Account</h1>
+            <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/59/59439.png"></a>
+            <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/49/49026.png"></a>
+            <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/34/34227.png"></a>
+            <p>or use your email for registration:</p>
+            <form id="registerForm" action="register.php" method="post">
+            <p id="emailError" style="color: red; display: none;">Please enter a valid email from @yahoo.com, @outlook.com, @hotmail.com, @aol.com, @icloud.com, or @gmail.com.</p>
+                <input type="text" name="fullname" placeholder="Full name" required />
+                <input type="text" name="username" autocomplete="off" placeholder="Username" required />
+                <input type="email" id="email" name="email" placeholder="Email address" required />
+                
+                <div class="phone-container">
+                    <span class="country-code">+91</span>
+                    <input type="tel" id="phone" name="phone" placeholder="Phone" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+                <input type="password" name="password" autocomplete="on" placeholder="Password" required />
+                <div class="checkbox">
+                    <input type="checkbox" id="signupCheck" required />
+                    <label for="signupCheck">I accept all terms & conditions</label>
+                </div>
+                <input type="submit" class="submit-btn" name="signup" value="Signup" />
+            </form>
+        </div>
+    </div> <!-- END Container -->
+    <!-- partial -->
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const emailForm = document.getElementById('registerForm');
+        const emailError = document.getElementById('emailError');
+
+        emailForm.addEventListener('submit', function (event) {
+            const allowedDomains = ['yahoo.com', 'outlook.com', 'hotmail.com', 'aol.com', 'icloud.com', 'gmail.com'];
+            const emailValue = emailInput.value.trim();
+            const emailDomain = emailValue.substring(emailValue.lastIndexOf('@') + 1);
+
+            if (!allowedDomains.includes(emailDomain)) {
+                event.preventDefault(); // Prevent form submission
+                emailError.style.display = 'block';
+            } else {
+                emailError.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
-
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

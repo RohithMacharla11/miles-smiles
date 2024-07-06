@@ -84,14 +84,14 @@ include('includes/navbar.php');
 
     <div class="card-body">
 
-      <?php
+    <?php
       if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-        //echo '<h2 class="bg-primary> ' .$_SESSION['success']. ' </h2>';
+        echo '<h3 style="color:green"> ' .$_SESSION['success']. ' </h2>';
         unset($_SESSION['success']);
       }
 
       if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-        //echo '<h2 class="bg-danger"> ' .$_SESSION['status']. ' </h2>';
+        echo '<h3 style="color:red"> ' .$_SESSION['status']. ' </h3>';
         unset($_SESSION['status']);
       }
       ?>

@@ -26,7 +26,7 @@ include('includes/header.php');
       <a href="#"><img class="social-login" src="https://image.flaticon.com/icons/png/128/34/34227.png"></a>
       <p>or use your email account:</p>
       <form action="code.php" method="post">
-        <input type="text" name="username" autocomplete="off" placeholder="Username" required />
+        <input type="text" name="admin_username" autocomplete="off" placeholder="Username" required />
         <input type="password" name="password" autocomplete="off" placeholder="Password" required /><br>
         <!-- <a href="#">Forgot password?</a><br> -->
         <input type="submit" class="submit-btn" name="login_btn" />

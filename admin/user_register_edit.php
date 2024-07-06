@@ -25,11 +25,12 @@ include('includes/navbar.php');
                 foreach ($query_run as $row) {
             ?>
 
-                    <form action = "user_code.php" method="post">
-                        <input type="hidden" name="edit_fullname" value="<?php echo $row['FullName'] ?>">
+                    <form action="user_code.php" method="post">
+                        <label> Full Name </label><br>
+                        <input type="text" name="edit_fullname" value="<?php echo $row['FullName'] ?>">
                         <div class="form-group">
-                            <label> Username </label>
-                            <input type="text" name="edit_username" value="<?php echo $row['UserName'] ?>" class="form-control" placeholder="Enter Username">
+
+                            <input type="hidden" name="edit_username" value="<?php echo $row['UserName'] ?>" class="form-control" placeholder="Enter Username">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
@@ -37,12 +38,12 @@ include('includes/navbar.php');
                         </div>
                         <div class="form-group">
                             <label>Phone</label>
-                            <input type="phone" name="edit_phone" value="<?php echo $row['Phone'] ?>" class="form-control" placeholder="Enter Phone Number">
+                            <input type="tel" name="edit_phone" pattern="[0-9]{10}" maxlength="10" value="<?php echo $row['Phone'] ?>" class="form-control" placeholder="Enter Phone Number">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Password</label>
                             <input type="password" name="edit_password" value="<?php echo $row['Password'] ?>" class="form-control" placeholder="Enter Password">
-                        </div>
+                        </div> -->
                         <a href="user_register.php" class="btn btn-danger"> CANCEL</a>
                         <button type="submit" name="updatebtn" class="btn btn-primary"> Update</button>
                     </form>

@@ -19,12 +19,16 @@ include('includes/navbar.php');
         <div class="modal-body">
 
           <div class="form-group">
-            <label> Username </label>
-            <input type="text" name="username" class="form-control" placeholder="Enter Username">
+            <label> admin_username </label>
+            <input type="text" name="admin_username" class="form-control" placeholder="Enter admin_username">
           </div>
           <div class="form-group">
             <label>Email</label>
             <input type="email" name="email" class="form-control" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" class="form-control" placeholder="Enter Phone Number">
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -64,12 +68,12 @@ include('includes/navbar.php');
 
       <?php
       if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-        //echo '<h2 class="bg-primary> ' .$_SESSION['success']. ' </h2>';
+        echo '<h3 style="color:green"> ' .$_SESSION['success']. ' </h2>';
         unset($_SESSION['success']);
       }
 
       if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-        //echo '<h2 class="bg-danger"> ' .$_SESSION['status']. ' </h2>';
+        echo '<h3 style="color:red"> ' .$_SESSION['status']. ' </h3>';
         unset($_SESSION['status']);
       }
       ?>
@@ -87,7 +91,8 @@ include('includes/navbar.php');
               <th> ID </th>
               <th> Username </th>
               <th>Email </th>
-              <th>Password</th>
+              <th>Phone </th>
+              <th>Change Password</th>
               <th>EDIT </th>
               <th>DELETE </th>
             </tr>
@@ -99,10 +104,17 @@ include('includes/navbar.php');
             ?>
                 <tr>
                   <td><?php echo $row['id']; ?></td>
-                  <td><?php echo $row['username']; ?></td>
+                  <td><?php echo $row['admin_username']; ?></td>
                   <td><?php echo $row['email']; ?></td>
-                  <td><?php echo $row['password']; ?></td>
+                  <td><?php echo $row['phone']; ?></td>
+                  <!-- <td> echo $row['password']; </td> -->
                   <!-- echo $row['usertype'];  -->
+                  <td>
+                    <form action="register_cp_edit.php" method="post">
+                      <input type="hidden" name="cpedit_id" value="<?php echo $row['id']; ?>">
+                      <button type="submit" name="cpedit_btn" class="btn btn-success"> Change</button>
+                    </form>
+                  </td>
                   <td>
                     <form action="register_edit.php" method="post">
                       <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">

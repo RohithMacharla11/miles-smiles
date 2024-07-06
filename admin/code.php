@@ -3,13 +3,14 @@ include("security.php");
 $connection = mysqli_connect("localhost", "root", "", "car_users");
 
 if (isset($_POST['registerbtn'])) {
-    $username = $_POST['username'];
+    $admin_username = $_POST['admin_username'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
     $password = $_POST['password'];
     $cpassword = $_POST['confirmpassword'];
 
     if ($password === $cpassword) {
-        $query = "INSERT INTO admin_register (username,email,password) VALUES ('$username','$email','$password')";
+        $query = "INSERT INTO admin_register (admin_username,email,phone,password) VALUES ('$admin_username','$email', '$phone','$password')";
         $query_run = mysqli_query($connection, $query);
         if ($query_run) {
             echo "Saved";
@@ -28,11 +29,12 @@ if (isset($_POST['registerbtn'])) {
 
 if (isset($_POST['updatebtn'])) {
     $id = $_POST['edit_id'];
-    $username = $_POST['edit_username'];
+    $admin_username = $_POST['edit_admin_username'];
     $email = $_POST['edit_email'];
+    $phone = $_POST['edit_phone'];
     $password = $_POST['edit_password'];
 
-    $query = "UPDATE admin_register SET username = '$username', email = '$email',password = '$password' where id = '$id'";
+    $query = "UPDATE admin_register SET admin_username = '$admin_username', email = '$email',phone = '$phone',password = '$password' where id = '$id'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
@@ -62,21 +64,21 @@ if (isset($_POST['delete_btn'])) {
 
 
 if (isset($_POST['login_btn'])) {
-    $username_login = $_POST['username'];
+    $admin_username_login = $_POST['admin_username'];
     $password_login = $_POST['password'];
 
-    $query = "SELECT * FRoM admin_register where username = '$username_login' AND password='$password_login'";
+    $query = "SELECT * FRoM admin_register where admin_username = '$admin_username_login' AND password='$password_login'";
     $query_run = mysqli_query($connection, $query);
 
     if (mysqli_fetch_array($query_run)) {
-        $_SESSION['username'] = $username_login;
+        $_SESSION['admin_username'] = $admin_username_login;
         require 'dbconfig.php';
 
         // Function to insert a new activity log entry
-        function insertActivityLog($connection, $username_login, $activity, $description)
+        function insertActivityLog($connection, $admin_username_login, $activity, $description)
         {
             $stmt = $connection->prepare("INSERT INTO activity_log (username, activity, description, timestamp) VALUES (?, ?, ?, NOW())");
-            $stmt->bind_param("sss", $username_login, $activity, $description);
+            $stmt->bind_param("sss", $admin_username_login, $activity, $description);
             $stmt->execute();
             $stmt->close();
         }
@@ -84,7 +86,7 @@ if (isset($_POST['login_btn'])) {
         $activity = "login";
         $description = "Admin logged in";
 
-        insertActivityLog($connection, $username_login, $activity, $description);
+        insertActivityLog($connection, $admin_username_login, $activity, $description);
 
         // Close the database connection
         $connection->close();

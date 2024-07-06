@@ -7,11 +7,11 @@ if($connection)
 }
 else
 {
-    header("Location:dbconfig.php");
+    header("Location:config.php");
 }
 
 if(!$_SESSION['admin_username'])
 {
-    header('Location: login.php');
+    header('Location: signin.php');
 }
 ?>

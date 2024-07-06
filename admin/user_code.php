@@ -44,24 +44,22 @@ if(isset($_POST['updatebtn'])){
     }
 
 }
+// if (isset($_POST['delete_btn'])) {
+//     $username = $_POST['delete_username'];
 
-if(isset($_POST['delete_btn']))
-{
-    $username = $_POST['delete_username'];
+//     // Escape the username to prevent SQL injection
+//     $username = mysqli_real_escape_string($connection, $username);
 
-    $query = "DELETE FROM users WHERE username='$username' ";
-    $query_run = mysqli_query($connection, $query);
+//     $query = "DELETE FROM users WHERE username='$username'";
+//     $query_run = mysqli_query($connection, $query);
 
-    if($query_run)
-    {
-        $_SESSION['success'] = "User Data is Deleted";
-        header('Location: user_register.php'); 
-    }
-    else
-    {
-        $_SESSION['status'] = "User Data is NOT DELETED";
-        header('Location: user_register.php'); 
-    }    
-}
+//     if ($query_run) {
+//         $_SESSION['success'] = "User Data is Deleted";
+//         header('Location: user_register.php');
+//     } else {
+//         $_SESSION['status'] = "User Data is NOT DELETED";
+//         header('Location: user_register.php');
+//     }
+// }
 
 ?>

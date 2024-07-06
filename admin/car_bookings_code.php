@@ -3,7 +3,7 @@ include("security.php");
 $connection = mysqli_connect("localhost", "root", "", "car_users");
 
 if(isset($_POST['bupdatebtn'])){
-    $username = $_POST['edit_username'];
+    $admin_username = $_POST['edit_admin_username'];
     $title = $_POST['edit_title'];
     $price = $_POST['edit_price'];
     $license_number = $_POST['edit_license_number'];
@@ -30,7 +30,7 @@ if(isset($_POST['bupdatebtn'])){
                   b.return_date = '$return_date',
                   b.airport_type = '$airport_type',
                   b.booking_status = '$booking_status'
-              WHERE cd.username = '$username'";
+              WHERE cd.admin_username = '$admin_username'";
     
     $query_run = mysqli_query($connection, $query);
 
@@ -44,13 +44,13 @@ if(isset($_POST['bupdatebtn'])){
 }
 
 if(isset($_POST['bdelete_btn'])){
-    $username = $_POST['delete_bookingid'];
+    $admin_username = $_POST['delete_bookingid'];
 
     $query = "DELETE cd, c, b
               FROM car_details cd
               JOIN cars c ON cd.car_id = c.car_id
               JOIN bookings b ON cd.detail_id = b.car_details_id
-              WHERE cd.username = '$username'";
+              WHERE cd.admin_username = '$admin_username'";
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){

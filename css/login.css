@@ -20,13 +20,22 @@ text-transform: uppercase;
 }
 input[type="email"],
 input[type="password"],
-input[type="text"] {
+input[type="text"]{
 background: #f4f8f7;
 border: none;
 font-weight: 300;
 margin: 5px;
 padding: 10px;
 width: 280px;
+}
+input[type="tel"]{
+    background: #f4f8f7;
+border: none;
+font-weight: 300;
+margin: 5px;
+padding: 10px;
+max-width: 280px;
+width: 100px;
 }
 .submit-btn {
 border: none;
@@ -154,4 +163,25 @@ background: #eaeaea;
 color: #555;
 padding: 20px;
 text-align: center;
+}
+
+.phone-container {
+    display: flex;
+    align-items: center;
+}
+
+.country-code {
+    background-color: #f4f8f7;;
+    /* Light ash color */
+    margin-left: 50px;;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px 2px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input[type="tel"] {
+    border-radius: 0 4px 4px 0;
+    flex: 1;
 }

@@ -25,15 +25,19 @@ include('includes/navbar.php');
                 foreach ($query_run as $row) {
             ?>
 
-                    <form action = "code.php" method="post">
+                    <form action="code.php" method="post">
                         <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>">
                         <div class="form-group">
-                            <label> Username </label>
-                            <input type="text" name="edit_username" value="<?php echo $row['username'] ?>" class="form-control" placeholder="Enter Username">
+                            <label> admin_username </label>
+                            <input type="text" name="edit_admin_username" value="<?php echo $row['admin_username'] ?>" class="form-control" placeholder="Enter admin_username">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" name="edit_email" value="<?php echo $row['email'] ?>" class="form-control" placeholder="Enter Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="edit_phone" pattern="[0-9]{10}" maxlength="10" class="form-control" placeholder="Enter Phone Number" value="<?php echo htmlspecialchars($row['phone']); ?>">
                         </div>
                         <div class="form-group">
                             <label>Password</label>

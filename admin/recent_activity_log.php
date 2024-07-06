@@ -31,7 +31,7 @@ echo '<thead><tr><th>User Name</th><th>Activity</th><th>Description</th><th>Time
 echo '<tbody>';
 foreach ($log_entries as $entry) {
     echo "<tr>";
-    echo "<td>" . htmlspecialchars($entry['username']) . "</td>";
+    echo "<td>" . htmlspecialchars($entry['admin_username']) . "</td>";
     echo "<td>" . htmlspecialchars($entry['activity']) . "</td>";
     echo "<td>" . htmlspecialchars($entry['description']) . "</td>";
     echo "<td>" . htmlspecialchars($entry['timestamp']) . "</td>";
