@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rent_now'])) {
         $detail_id = $conn->lastInsertId();
 
         // Update booking_status and car_details_id in bookings table
-        $updateStmt = $conn->prepare("UPDATE bookings SET booking_status = 'booked', car_details_id = :detail_id WHERE UserName = :username AND booking_status = 'not_booked' ORDER BY created_time DESC LIMIT 1");
+        $updateStmt = $conn->prepare("UPDATE bookings SET booking_status = 'booked', car_details_id = :detail_id WHERE UserName = :username");
         $updateStmt->bindParam(':detail_id', $detail_id);
         $updateStmt->bindParam(':username', $username);
         $updateStmt->execute();
@@ -42,10 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rent_now'])) {
         // Commit the transaction
         $conn->commit();
 
-        header("Location: booking_confirm.php"); // Redirect to profile page after successful booking
+        // Redirect to a success page
+        header('Location: booking_confirm.php');
         exit();
+
     } catch (PDOException $e) {
-        // Rollback the transaction in case of error
+        // Rollback the transaction on error
         $conn->rollBack();
         echo "Error: " . $e->getMessage();
     }

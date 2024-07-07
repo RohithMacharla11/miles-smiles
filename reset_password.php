@@ -99,6 +99,7 @@
 .alert-danger {
     background-color: #e74a3b;
     color: #fff;
+    text-decoration: none;
 }
 
 h3 {

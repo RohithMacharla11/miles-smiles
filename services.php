@@ -12,7 +12,8 @@
   
 <?php include('header.php'); 
   if(!isset($_SESSION["username"])){
-    header("signin.php");
+    header("Location: signin.php");
+    exit();
   }
 ?>
   
@@ -35,7 +36,7 @@
         $details = json_decode($row['details']);
         $images = json_decode($row['images']);
         $isBooked = $row['booking_status'] === 'booked';
-        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
+        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
         echo '    <div class="featured-car-card">';
         echo '        <figure class="card-banner">';
         echo '            <img src="' . $images[0] . '" alt="' . $row['title'] . '">';
@@ -52,19 +53,17 @@
         echo '                <li class="card-list-item"><ion-icon name="hardware-chip-outline"></ion-icon><span class="card-item-text">' . $details[3] . '</span></li>';
         echo '            </ul>';
         echo '            <div class="card-price-wrapper">';
-        echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / ' . (strpos($row['price'], 'day') ? 'day' : 'day') . '</p>';
+        echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / day</p>';
         if ($isBooked) {
           echo '                <button class="btn booked-btn">Booked</button>';
-      } 
-      else {
-        echo '                <button class="btn car-link" data-car=\'{"id": "' . $row['car_id'] . '","title": "' . $row['title'] . '", "year": "' . $row['year'] . '", "price": "' . $row['price'] . '", "details": ' . json_encode($details) . ', "images": ' . json_encode($images) . '}\'>Rent now</button>';
-      }
+        } else {
+          echo '                <a href="details.php?car_id=' . $row['car_id'] . '" class="btn">Rent now</a>';
+        }
         echo '            </div>';
         echo '        </div>';
         echo '    </div>';
         echo '</li>';
       }
-    
       ?>
     </ul>
   </div>

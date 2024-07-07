@@ -44,17 +44,17 @@ document.getElementById('price').addEventListener('change', applyFilters);
 document.getElementById('ac').addEventListener('change', applyFilters);
 document.getElementById('seating').addEventListener('change', applyFilters);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const carLinks = document.querySelectorAll('.car-link');
-  carLinks.forEach(link => {
-    link.addEventListener('click', event => {
-      event.preventDefault();
-      const carData = JSON.parse(link.getAttribute('data-car'));
-      sessionStorage.setItem('selectedCar', JSON.stringify(carData));
-      window.location.href = 'details.php';
+document.addEventListener("DOMContentLoaded", function() {
+  const rentButtons = document.querySelectorAll(".btn.car-link");
+
+  rentButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const carData = JSON.parse(this.getAttribute("data-car"));
+      window.location.href = `details.php?car_id=${carData.id}`;
     });
   });
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
 const bookedBtns = document.querySelectorAll('.booked-btn');
