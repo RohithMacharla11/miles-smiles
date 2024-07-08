@@ -260,3 +260,13 @@ ul>li span:first-of-type {
         opacity: 1;
     }
 }
+.daysbtn{
+    display: flex;
+    flex-direction: row;
+}
+.days{
+    width:40px;
+    margin-left: 2px;
+    margin-right: 2px;
+    text-align:center;
+}

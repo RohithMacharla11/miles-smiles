@@ -1,133 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
-<title>Form Submit to Send Email</title>
-<style>
-  *,*:after,*:before{
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-}
-body{
-	font-family: arial;
-	font-size: 16px;
-	margin: 0;
-	background: #fff;
-	color: #000;
-
-	display: flex;
-	align-items:center;
-	justify-content: space-around;
-	min-height: 100vh;
-}
-
-.form-container{
-	width: 100%;
-	max-width: 600px;
-	margin:0 auto;
-  background: #09aad0;
-  padding: 20px;
-  border-radius: 10px;
-  color: #fff;
-}
-.input-row{
-  margin-bottom: 10px;
-}
-.input-row label{
-	display: block;
-	margin-bottom: 3px;
-}
-.input-row input,
-.input-row textarea{
-	width: 100%;
-	padding: 10px;
-	border:0;
-	border-radius: 3px;
-	outline: 0;
-	margin-bottom: 3px;
-	font-size: 18px;
-	font-family: arial;
-}
-.input-row textarea{
-	height: 100px;
-}
-.input-row input[type="submit"] {
-  width: 100px;
-  margin:0 auto;
-  display: block;
-  text-align: center; 
-  background: #002f3a;
-  color: #ffffff;
-  cursor: pointer;
-}
-.success {
-  background-color: #9fd2a1;
-  padding: 5px 10px;
-  color: #326b07;
-  text-align: center;
-  border-radius: 3px;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-
-
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Rental</title>
+  <link rel="stylesheet" href="css/services.css">
+  <script src="https://kit.fontawesome.com/8954b3c36f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
 </head>
 <body>
-
-<?php
-if(!empty($_POST["send"])) {
-	$userName = $_POST["userName"];
-  $userEmail = $_POST["userEmail"];
-	$userPhone = $_POST["userPhone"];
-	$userMessage = $_POST["userMessage"];
-	$toEmail = "websolution90@gmail.com";
   
-	$mailHeaders = "Name: " . $userName .
-	"\r\n Email: ". $userEmail  . 
-	"\r\n Phone: ". $userPhone  . 
-	"\r\n Message: " . $userMessage . "\r\n";
+  <?php include('header.php'); 
+    if(!isset($_SESSION["username"])){
+      header("Location: signin.php");
+      exit();
+    }
+  ?>
+    
+  <section class="section-featured-car">
+    <div class="container">
+      <ul class="featured-car-list">
+        <?php
+        include('config.php');
 
-	if(mail($toEmail, $userName, $mailHeaders)) {
-	    $message = "Your contact information is received successfully.";
-	}
-}
-?>
+        // Function to check if dates overlap
+        function datesOverlap($start1, $end1, $start2, $end2) {
+            return ($start1 <= $end2) && ($end1 >= $start2);
+        }
 
-<div class="form-container">
-  <form name="contactFormEmail" method="post">
-    <div class="input-row">
-      <label>Name <em>*</em></label> 
-      <input type="text" name="userName" required id="userName"> 
-    </div>
-    <div class="input-row">
-      <label>Email <em>*</em></label> 
-      <input type="email" name="userEmail" required id="userEmail"> 
-    </div>
-    <div class="input-row">
-      <label>Phone <em>*</em></label> 
-      <input type="text" name="userPhone" required id="userPhone">
-    </div>
-    <div class="input-row">
-      <label>Message <em>*</em></label> 
-     <!-- <textarea name="userMessage" required id="userMessage"> -->
-    </div>
-    <div class="input-row">
-      <input type="submit" name="send" value="Submit">
-      <?php if (! empty($message)) {?>
-      <div class='success'>
-        <strong><?php echo $message; ?>	</strong>
-      </div>
-      <?php } ?>
-    </div>
-  </form>
-</div>
+        $stmt = $conn->prepare("
+            SELECT c.*, b.booking_status, b.pickup_date, b.return_date, w.wishlist_id
+            FROM cars c
+            LEFT JOIN car_details cd ON c.car_id = cd.car_id
+            LEFT JOIN bookings b ON cd.detail_id = b.car_details_id
+            LEFT JOIN wishlist w ON c.car_id = w.car_id AND w.username = :username
+            WHERE c.car_status = 'active'
+            ORDER BY c.car_id
+        ");
+        $stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $cars = $stmt->fetchAll();
 
-</body>
-</html>
+        foreach ($cars as $row) {
+          $details = json_decode($row['details']);
+          $images = json_decode($row['images']);
+          $isBooked = false;
 
+          if (!empty($row['pickup_date']) && !empty($row['return_date'])) {
+              $pickupDate = new DateTime($row['pickup_date']);
+              $returnDate = new DateTime($row['return_date']);
+
+              // Check against each booking
+              $bookingsStmt = $conn->prepare("
+                  SELECT pickup_date, return_date
+                  FROM bookings
+                  WHERE car_details_id = (SELECT detail_id FROM car_details WHERE car_id = :car_id)
+              ");
+              $bookingsStmt->bindParam(':car_id', $row['car_id'], PDO::PARAM_INT);
+              $bookingsStmt->execute();
+              $bookings = $bookingsStmt->fetchAll(PDO::FETCH_ASSOC);
+
+              foreach ($bookings as $booking) {
+                  $bookingPickupDate = new DateTime($booking['pickup_date']);
+                  $bookingReturnDate = new DateTime($booking['return_date']);
+                  if (datesOverlap($pickupDate, $returnDate, $bookingPickupDate, $bookingReturnDate)) {
+                      $isBooked = true;
+                      break;
+                  }
+              }
+          }
+
+          $isWishlisted = $row['wishlist_id'] !== null;
+
+          echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show ' . ($isBooked ? 'booked' : '') . '" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
+          echo '    <div class="featured-car-card">';
+          if ($isBooked) {
+              echo '      <div class="booked-overlay">Booked</div>';
+          }
+          echo '        <figure class="card-banner">';
+          echo '            <img src="' . $images[0] . '" alt="' . $row['title'] . '">';
+          echo '        </figure>';
+          echo '        <div class="card-content">';
+          echo '            <div class="card-title-wrapper">';
+          echo '                <h3 class="h3 card-title"><a href="#">' . $row['title'] . '</a></h3>';
+          echo '                <data class="year" value="' . $row['year'] . '">' . $row['year'] . '</data>';
+          echo '            </div>';
+          echo '            <ul class="card-list">';
+          echo '                <li class="card-list-item"><i class="fa-solid fa-headset"></i><span class="card-item-text">' . $details[0] . '</span></li>';
+          echo '                <li class="card-list-item"><ion-icon name="flash-outline"></ion-icon><span class="card-item-text">' . $details[1] . '</span></li>';
+          echo '                <li class="card-list-item"><ion-icon name="speedometer-outline"></ion-icon><span class="card-item-text">' . $details[2] . '</span></li>';
+          echo '                <li class="card-list-item"><ion-icon name="hardware-chip-outline"></ion-icon><span class="card-item-text">' . $details[3] . '</span></li>';
+          echo '            </ul>';
+          echo '            <div class="card-price-wrapper">';
+          echo '                <p class="card-price"><strong>' . $row['price'] . '</strong> / day</p>';
+          if ($isBooked) {
+              echo '                <button class="btn booked-btn">Booked</button>';
+          } else {
+              echo '                <button class="btn wishlist-btn ' . ($isWishlisted ? 'wishlisted' : '') . '" data-car-id="' . $row['car_id'] . '">';
+              echo '                    <i class="' . ($isWishlisted ? 'fa-solid fa-heart' : 'fa-regular fa-heart') . '"></i>';
+              echo '                </button>';
+              echo '                <a href="details.php?car_id=' . $row['car_id'] . '" class="btn">Rent now</a>';
+          }
+          echo '            </div>';
+          echo '        </div>';
+          echo '    </div>';
+          echo '</li>';
+        }
+        ?>
+      </ul>
+    </div>
+    <div class="filter-section">
+      <h3>Filter Cars</h3>
+      <form id="filter-form">
+        <div class="filter-group">
+          <label for="brand">Brand</label>
+          <select id="brand" name="brand">
+            <option value="all">All</option>
+            <option value="honda">Honda</option>
+            <option value="ford">Ford</option>
+            <option value="tesla">Tesla</option>
+            <option value="bmw">BMW</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="chevrolet">Chevrolet</option>
+            <option value="nissan">Nissan</option>
+            <option value="hyundai">Hyundai</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="price">Price</label>
+          <select id="price" name="price">
+            <option value="all">All</option>
+            <option value="low">Below ₹6000</option>
+            <option value="mid">₹6000 - ₹9000</option>
+            <option value="high">Above ₹9000</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="ac">AC</label>
+          <select id="ac" name="ac">
+            <option value="all">All</option>
+            <option value="ac">AC</option>
+            <option value="non-ac">Non-AC</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="seating">Seating Capacity</label>
+          <select id="seating" name="seating">
+            <option value="all">All</option>
+            <option value="4">4 People</option>
+            <option value="6">6 People</option>
+            <option value="8">8 People</option>
+          </select>
+        </div>
+        <button type="button" onclick="applyFilters()">Apply Filters</button>
+      </form>
+    </div>
+  </section>
+  <script src="js/services.js"></script>
+  <?php include('footer.php'); ?>
+  </body>
+  </html>

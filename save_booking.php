@@ -42,10 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rent_now'])) {
         // Commit the transaction
         $conn->commit();
 
-        header("Location: booking_confirm.php"); // Redirect to profile page after successful booking
+        // Redirect to a success page
+        header('Location: booking_confirm.php');
         exit();
+
     } catch (PDOException $e) {
-        // Rollback the transaction in case of error
+        // Rollback the transaction on error
         $conn->rollBack();
         echo "Error: " . $e->getMessage();
     }

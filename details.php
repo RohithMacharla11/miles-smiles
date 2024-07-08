@@ -1,50 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car Details</title>
-  <link rel="stylesheet" href="css/details.css">
-  
   <script src="https://kit.fontawesome.com/8954b3c36f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+  <link rel="stylesheet" href="css/details.css">
+  <title>Cars</title>
 </head>
 
 <body>
-  <?php include('header.php');
-  if (!isset($_SESSION["username"])) {
-    header("signin.php");
+  <?php include('header.php'); ?>
+  <?php
+  include('config.php');
+
+  if (!isset($_GET['car_id'])) {
+    echo "Car ID not provided!";
+    exit();
+  }
+
+  $car_id = $_GET['car_id'];
+  $stmt = $conn->prepare("
+        SELECT c.*, b.booking_status 
+        FROM cars c
+        LEFT JOIN car_details cd ON c.car_id = cd.car_id
+        LEFT JOIN bookings b ON cd.detail_id = b.car_details_id
+        WHERE c.car_id = :car_id
+    ");
+  $stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
+  $stmt->execute();
+  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $car = $stmt->fetch();
+
+  if ($car) {
+    $details = json_decode($car['details']);
+    $images = json_decode($car['images']);
+    $isBooked = $car['booking_status'] === 'booked';
+  ?>
+    <div class="car-container-section">
+      <div class="car-content-section">
+        <h1><?php echo $car['title']; ?></h1><br>
+        <div class="cont-gird">
+          <div class="icon-first">
+            <a><i class="fa-solid fa-clock"></i>&nbsp;&nbsp; <?php echo $details[0]; ?><br></a>
+            <a><i class="fa-solid fa-car"></i>&nbsp;&nbsp; <?php echo $details[1]; ?><br></a>
+            <a><i class="fa-solid fa-suitcase-rolling"></i>&nbsp;&nbsp; <?php echo $details[2]; ?><br></a>
+            <a><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp; <?php echo $details[3]; ?><br></a>
+          </div>
+          <div class="icon-second">
+            <a><i class="fa-solid fa-people-group"></i>&nbsp;&nbsp; <?php echo $details[1]; ?><br></a>
+            <a><i class="fa-solid fa-droplet"></i>&nbsp;&nbsp; <?php echo $details[0]; ?><br></a>
+            <a><i class="fa-solid fa-gauge-simple-high"></i>&nbsp;&nbsp; <?php echo $details[0]; ?><br></a>
+          </div>
+        </div>
+        <div class="arrow-section">
+          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?><br></a>
+          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[0]; ?></a><br>
+          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?></a><br>
+          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?></a><br>
+          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?></a><br>
+        </div>
+        <div class="price-section">
+          <p class="price" id="car-price"><?php echo $car['price']; ?> / day</p>
+          <?php if ($isBooked) { ?>
+            <button class="btn booked-btn" disabled>Booked</button>
+          <?php } else { ?>
+            <button class="btn" id="rent-now-btn">Rent now</button>
+          <?php } ?>
+        </div>
+
+      </div>
+      <div class="car-section">
+        <img src="<?php echo $images[0]; ?>" height="350px" width="608px" style="border-radius:20px 0 0 0;">
+        <div class="car-gird">
+          <img src="<?php echo $images[1]; ?>" height="186px" width="300px">
+          <img src="<?php echo $images[2]; ?>" height="186px" width="300px">
+          <img src="<?php echo $images[3]; ?>" height="186px" width="300px" style="border-radius:0 0 0 20px;">
+          <img src="<?php echo $images[4]; ?>" height="186px" width="300px">
+        </div>
+      </div>
+    </div>
+    <form id="bookingForm" action="save_booking.php" method="post">
+      <input type="hidden" name="detail_id" id="detail-id">
+      <input type="hidden" name="car_id" id="car-id" value="<?php echo $car['car_id']; ?>">
+      <input type="hidden" name="title" id="car-title-hidden" value="<?php echo $car['title']; ?>">
+      <input type="hidden" name="year" id="car-year-hidden" value="<?php echo $car['year']; ?>">
+      <input type="hidden" name="price" id="car-price-hidden" value="<?php echo $car['price']; ?>">
+      <input type="hidden" name="details" id="car-details-hidden" value="<?php echo $car['details']; ?>">
+      <input type="hidden" name="images" id="car-images-hidden" value="<?php echo $car['images']; ?>">
+      <input type="hidden" name="username" id="username-hidden">
+      <input type="hidden" name="rent_now" value="rent_now">
+    </form>
+  <?php
+  } else {
+    echo "Car not found!";
   }
   ?>
-
-  <div class="car-details">
-    <div class="car-info">
-      <h1 id="car-title"></h1>
-      <div class="rating">
-        <span id="average-rating">0.0</span>
-        <span id="total-ratings">(0 ratings)</span>
-      </div>
-      <p><strong>Year:</strong> <span id="car-year"></span></p>
-      <div id="car-details">
-        <ul class="card-list">
-          <li class="card-list-item"><i class="fa-solid fa-headset"></i><span class="card-item-text" id="car-seating"></span></li>
-          <li class="card-list-item"><i class="fa-solid fa-headset"></i><span class="card-item-text" id="car-engine"></span></li>
-          <li class="card-list-item"><i class="fa-solid fa-headset"></i></ion-icon><span class="card-item-text" id="car-speed"></span></li>
-          <li class="card-list-item"><i class="fa-solid fa-headset"></i></ion-icon><span class="card-item-text" id="car-transmission"></span></li>
-        </ul>
-      </div>
-      <p class="price" id="car-price"></p>
-      <button class="btn" id="rent_btn">Rent now</button>
-    </div>
-    <div class="carousel">
-      <div class="carousel-inner">
-        <!-- Carousel items will be inserted here dynamically -->
-      </div>
-      <button class="carousel-control-prev" onclick="prevSlide()">&#10094;</button>
-      <button class="carousel-control-next" onclick="nextSlide()">&#10095;</button>
-    </div>
-  </div>
+  <br>
   <div class="reviews">
     <h2>Description</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -67,21 +120,8 @@
     </div>
   </div>
 
-  <form id="bookingForm" action="save_booking.php" method="post">
-    <input type="hidden" name="detail_id" id="detail-id">
-    <input type="hidden" name="car_id" id="car-id">
-    <input type="hidden" name="title" id="car-title-hidden">
-    <input type="hidden" name="year" id="car-year-hidden">
-    <input type="hidden" name="price" id="car-price-hidden">
-    <input type="hidden" name="details" id="car-details-hidden">
-    <input type="hidden" name="images" id="car-images-hidden">
-    <input type="hidden" name="username" id="username-hidden">
-    <input type="hidden" name="rent_now" value="rent_now">
-  </form>
-
+  <?php include('footer.php'); ?>
   <script src="js/details.js"></script>
 </body>
 
 </html>
-
-<?php include('footer.php'); ?>

@@ -44,23 +44,58 @@ document.getElementById('price').addEventListener('change', applyFilters);
 document.getElementById('ac').addEventListener('change', applyFilters);
 document.getElementById('seating').addEventListener('change', applyFilters);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const carLinks = document.querySelectorAll('.car-link');
-  carLinks.forEach(link => {
-    link.addEventListener('click', event => {
-      event.preventDefault();
-      const carData = JSON.parse(link.getAttribute('data-car'));
-      sessionStorage.setItem('selectedCar', JSON.stringify(carData));
-      window.location.href = 'details.php';
+document.addEventListener("DOMContentLoaded", function() {
+  const rentButtons = document.querySelectorAll(".btn.car-link");
+
+  rentButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const carData = JSON.parse(this.getAttribute("data-car"));
+      window.location.href = `details.php?car_id=${carData.id}`;
     });
   });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-const bookedBtns = document.querySelectorAll('.booked-btn');
-bookedBtns.forEach(btn => {
+
+// services.js
+
+// Add event listener to the "Booked" button
+document.querySelectorAll('.booked-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    alert('This car is already booked.');
+    alert('This car is already booked!');
   });
 });
+
+// Function to apply the "booked" class
+function markCarAsBooked(carItem) {
+  carItem.classList.add('booked');
+  carItem.querySelector('.card-price-wrapper .btn').textContent = 'Booked';
+  carItem.querySelector('.card-price-wrapper .btn').classList.remove('btn');
+  carItem.querySelector('.card-price-wrapper .btn').classList.add('booked-btn');
+}
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.wishlist-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const carId = this.getAttribute('data-car-id');
+      const action = this.classList.contains('wishlisted') ? 'remove' : 'add';
+
+      fetch('wishlist.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `car_id=${carId}&action=${action}`
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (action === 'add') {
+          this.classList.add('wishlisted');
+          this.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        } else {
+          this.classList.remove('wishlisted');
+          this.innerHTML = '<i class="fa-regular fa-heart"></i>';
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  });
 });

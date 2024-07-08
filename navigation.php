@@ -43,7 +43,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="wishlist_page.php">
                         <span class="icon">
                             <i class="fa-solid fa-bookmark"></i>
                         </span>

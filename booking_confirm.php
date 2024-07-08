@@ -67,9 +67,11 @@ echo '</script>';
             <li><span>Pickup Time</span><span id="pickupTime"><?php echo htmlspecialchars($booking['pickup_time']); ?></span></li>
             <li><span>No. of Days</span>
                 <span>
+                    <div class = "daysbtn">
                     <button onclick="decrementDays()">-</button>
-                    <input type="number" id="days" value="1" min="1" oninput="updateTotalAmount()">
+                    <input type="number" class = "days" id="days" value="1" min="1" oninput="updateTotalAmount()">
                     <button onclick="incrementDays()">+</button>
+                    </div>
                 </span>
             </li>
             <li><span>Total Amount</span><span id="totalAmount">₹<?php echo htmlspecialchars($carDetails['price']); ?></span></li>
@@ -77,13 +79,27 @@ echo '</script>';
     </div>
     <div class="card">
         <div class="cta-row">
-        <button class="secondary" onclick="window.location.href='home.php'">Back to dashboard</button>
+        <button class="secondary" onclick="updateBookingStatus()">Back to dashboard</button>
             <button id="rent-btn">Rent now</button>
         </div>
     </div>
 </div>
 
 <script>
+    function updateBookingStatus() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_booking_status.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                window.location.href = 'home.php';
+            } else {
+                alert('Failed to update booking status.');
+            }
+        };
+        xhr.send("username=" + encodeURIComponent(user.UserName));
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         const pricePerDay = <?php echo $carDetails['price']; ?>;
         document.getElementById("days").setAttribute("data-price", pricePerDay);
@@ -130,25 +146,28 @@ echo '</script>';
         const carName = car.title;
         const carPrice = car.price;
         const carDetails = car.car_details;
+        const days = document.getElementById("days").value;
+        const totalAmount = document.getElementById("totalAmount").textContent;
 
         let message = `Thank You for renting a car\nName: ${fullName}\nPhone no: ${phone}\nEmail: ${email}\nBooking Details:\n`;
         if (airportType) message += `AIRPORT TYPE: ${airportType}\n`;
         message += `Pickup: ${pickup}\nDropoff: ${booking.dropoff}\nPickup Date: ${pickupDate}\nPickup Time: ${pickupTime}\n`;
         if (returnDate) message += `Return Date: ${returnDate}\n`;
-        message += `Car Details:\nCar Name: ${carName}\nCar Price: ${carPrice}\nCar Details: ${carDetails}`;
+        message += `Car Details:\nCar Name: ${carName}\nCar Price: ${carPrice}\nCar Details: ${carDetails}\n`;
+        message += `No. of Days: ${days}\nTotal Amount: ${totalAmount}`;
 
         const encodedMessage = encodeURIComponent(message);
         const whatsappURL = `https://wa.me/917989481578?text=${encodedMessage}`;
         const whatsappWindow = window.open(whatsappURL, '_blank');
 
-        // if (whatsappWindow) {
-        //     setTimeout(function() {
-        //         window.location.href = 'home.php';
-        //     }, 2000); 
-        // } else {
-        //     alert('Please allow pop-ups to open WhatsApp.');
-        //     window.location.href = 'home.php';
-        // }
+        if (whatsappWindow) {
+            setTimeout(function() {
+                window.location.href = 'mybookings.php';
+            }, 2000); 
+        } else {
+            alert('Please allow pop-ups to open WhatsApp.');
+            window.location.href = 'mybookings.php';
+        }
     }
 </script>
 </body>

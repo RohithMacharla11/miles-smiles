@@ -2,19 +2,19 @@ let ratings = [];
 let selectedRating = 0;
 let currentCarId = null;
 let currentSlideIndex = 0; // Track the current slide index
-
 document.addEventListener('DOMContentLoaded', () => {
+  // Assuming the button ID is 'rent_btn' and it was changed to 'rent-now-btn' for consistency
+  document.getElementById('rent-now-btn').addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default form submission for debugging
+      console.log('Form data before submission:', getFormData());
+      document.getElementById('bookingForm').submit();
+  });
+
   const carData = JSON.parse(sessionStorage.getItem('selectedCar'));
   if (carData) {
-    populateDetailsPage(carData);
-    populateHiddenInputs(carData);
+      populateDetailsPage(carData);
+      populateHiddenInputs(carData);
   }
-
-  document.getElementById('rent_btn').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default form submission for debugging
-    console.log('Form data before submission:', getFormData());
-    document.getElementById('bookingForm').submit();
-  });
 
   attachEventListeners(); // Attach event listeners for review and rating
 });
@@ -27,20 +27,20 @@ function populateDetailsPage(data) {
   const detailsContainer = document.getElementById('car-details');
   detailsContainer.innerHTML = ''; 
   data.details.forEach(detail => {
-    const p = document.createElement('p');
-    p.innerText = detail;
-    detailsContainer.appendChild(p);
+      const p = document.createElement('p');
+      p.innerText = detail;
+      detailsContainer.appendChild(p);
   });
 
   const carouselInner = document.querySelector('.carousel-inner');
   carouselInner.innerHTML = ''; 
   data.images.forEach((imgSrc, index) => {
-    const div = document.createElement('div');
-    div.className = 'carousel-item' + (index === 0 ? ' active' : '');
-    const img = document.createElement('img');
-    img.src = imgSrc;
-    div.appendChild(img);
-    carouselInner.appendChild(div);
+      const div = document.createElement('div');
+      div.className = 'carousel-item' + (index === 0 ? ' active' : '');
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      div.appendChild(img);
+      carouselInner.appendChild(div);
   });
   showSlide(currentSlideIndex); // Show the initial slide
 }
@@ -58,22 +58,22 @@ function populateHiddenInputs(data) {
 
 function getFormData() {
   return {
-    car_id: document.getElementById('car-id').value,
-    title: document.getElementById('car-title-hidden').value,
-    year: document.getElementById('car-year-hidden').value,
-    price: document.getElementById('car-price-hidden').value,
-    details: document.getElementById('car-details-hidden').value,
-    images: document.getElementById('car-images-hidden').value
+      car_id: document.getElementById('car-id').value,
+      title: document.getElementById('car-title-hidden').value,
+      year: document.getElementById('car-year-hidden').value,
+      price: document.getElementById('car-price-hidden').value,
+      details: document.getElementById('car-details-hidden').value,
+      images: document.getElementById('car-images-hidden').value
   };
 }
 
 function attachEventListeners() {
   document.querySelectorAll('.star').forEach(star => {
-    star.addEventListener('click', selectRating);
+      star.addEventListener('click', selectRating);
   });
 
   document.getElementById('review-submit').addEventListener('click', addReview);
-  document.getElementById('rent_btn').addEventListener('click', handleRentNow);
+  document.getElementById('rent-now-btn').addEventListener('click', handleRentNow);
 
   // Carousel controls
   document.querySelector('.carousel-control-prev').addEventListener('click', prevSlide);
@@ -85,7 +85,7 @@ function selectRating(event) {
   selectedRating = value;
 
   document.querySelectorAll('.star').forEach(star => {
-    star.classList.toggle('selected', parseInt(star.getAttribute('data-value')) <= value);
+      star.classList.toggle('selected', parseInt(star.getAttribute('data-value')) <= value);
   });
 }
 
@@ -94,15 +94,15 @@ function addReview() {
   const reviewMedia = document.getElementById('review-media').files[0];
 
   if (!selectedRating || !reviewText) {
-    alert('Please provide a rating and review text.');
-    return;
+      alert('Please provide a rating and review text.');
+      return;
   }
 
   const review = {
-    text: reviewText,
-    rating: selectedRating,
-    media: reviewMedia ? URL.createObjectURL(reviewMedia) : null,
-    mediaType: reviewMedia ? reviewMedia.type : null
+      text: reviewText,
+      rating: selectedRating,
+      media: reviewMedia ? URL.createObjectURL(reviewMedia) : null,
+      mediaType: reviewMedia ? reviewMedia.type : null
   };
 
   saveReview(review);
@@ -122,8 +122,8 @@ function saveReview(review) {
 function loadReviews() {
   const savedReviews = JSON.parse(localStorage.getItem(`reviews-${currentCarId}`)) || [];
   savedReviews.forEach(review => {
-    displayReview(review);
-    ratings.push(review.rating);
+      displayReview(review);
+      ratings.push(review.rating);
   });
   updateRatings();
 }
@@ -135,12 +135,12 @@ function displayReview(review) {
   reviewItem.innerHTML = `<p><strong>User:</strong> ${review.text}</p>`;
 
   if (review.media) {
-    const mediaElement = document.createElement(review.mediaType.startsWith('video/') ? 'video' : 'img');
-    mediaElement.src = review.media;
-    if (review.mediaType.startsWith('video/')) {
-      mediaElement.controls = true;
-    }
-    reviewItem.appendChild(mediaElement);
+      const mediaElement = document.createElement(review.mediaType.startsWith('video/') ? 'video' : 'img');
+      mediaElement.src = review.media;
+      if (review.mediaType.startsWith('video/')) {
+          mediaElement.controls = true;
+      }
+      reviewItem.appendChild(mediaElement);
   }
 
   reviewList.appendChild(reviewItem);
@@ -156,7 +156,7 @@ function updateRatings() {
 
 function clearReviewForm() {
   document.querySelectorAll('.star').forEach(star => {
-    star.classList.remove('selected');
+      star.classList.remove('selected');
   });
   selectedRating = 0;
   document.getElementById('review-text').value = '';
@@ -169,21 +169,14 @@ function handleRentNow() {
 }
 
 // Carousel functions
-function showSlide(index) {
-  const slides = document.querySelectorAll('.carousel-item');
-  slides.forEach((slide, i) => {
-    slide.style.display = (i === index) ? 'block' : 'none';
+
+document.addEventListener("DOMContentLoaded", function() {
+  const rentButtons = document.querySelectorAll(".btn.car-link");
+
+  rentButtons.forEach(button => {
+      button.addEventListener("click", function() {
+          const carData = JSON.parse(this.getAttribute("data-car"));
+          window.location.href = `save_booking.php?car_id=${carData.id}`;
+      });
   });
-}
-
-function nextSlide() {
-  const slides = document.querySelectorAll('.carousel-item');
-  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-  showSlide(currentSlideIndex);
-}
-
-function prevSlide() {
-  const slides = document.querySelectorAll('.carousel-item');
-  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-  showSlide(currentSlideIndex);
-}
+});
