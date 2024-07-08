@@ -72,3 +72,30 @@ function markCarAsBooked(carItem) {
   carItem.querySelector('.card-price-wrapper .btn').classList.remove('btn');
   carItem.querySelector('.card-price-wrapper .btn').classList.add('booked-btn');
 }
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.wishlist-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const carId = this.getAttribute('data-car-id');
+      const action = this.classList.contains('wishlisted') ? 'remove' : 'add';
+
+      fetch('wishlist.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `car_id=${carId}&action=${action}`
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (action === 'add') {
+          this.classList.add('wishlisted');
+          this.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        } else {
+          this.classList.remove('wishlisted');
+          this.innerHTML = '<i class="fa-regular fa-heart"></i>';
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  });
+});
