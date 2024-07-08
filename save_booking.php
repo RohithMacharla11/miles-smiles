@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rent_now'])) {
         $detail_id = $conn->lastInsertId();
 
         // Update booking_status and car_details_id in bookings table
-        $updateStmt = $conn->prepare("UPDATE bookings SET booking_status = 'booked', car_details_id = :detail_id WHERE UserName = :username");
+        $updateStmt = $conn->prepare("UPDATE bookings SET booking_status = 'booked', car_details_id = :detail_id WHERE UserName = :username AND booking_status = 'not_booked' ORDER BY created_time DESC LIMIT 1");
         $updateStmt->bindParam(':detail_id', $detail_id);
         $updateStmt->bindParam(':username', $username);
         $updateStmt->execute();

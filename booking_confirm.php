@@ -67,9 +67,11 @@ echo '</script>';
             <li><span>Pickup Time</span><span id="pickupTime"><?php echo htmlspecialchars($booking['pickup_time']); ?></span></li>
             <li><span>No. of Days</span>
                 <span>
+                    <div class = "daysbtn">
                     <button onclick="decrementDays()">-</button>
-                    <input type="number" id="days" value="1" min="1" oninput="updateTotalAmount()">
+                    <input type="number" class = "days" id="days" value="1" min="1" oninput="updateTotalAmount()">
                     <button onclick="incrementDays()">+</button>
+                    </div>
                 </span>
             </li>
             <li><span>Total Amount</span><span id="totalAmount">₹<?php echo htmlspecialchars($carDetails['price']); ?></span></li>
@@ -77,13 +79,27 @@ echo '</script>';
     </div>
     <div class="card">
         <div class="cta-row">
-        <button class="secondary" onclick="window.location.href='home.php'">Back to dashboard</button>
+        <button class="secondary" onclick="updateBookingStatus()">Back to dashboard</button>
             <button id="rent-btn">Rent now</button>
         </div>
     </div>
 </div>
 
 <script>
+    function updateBookingStatus() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "update_booking_status.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            window.location.href = 'home.php';
+        } else {
+            alert('Failed to update booking status.');
+        }
+    };
+    xhr.send("username=" + encodeURIComponent(user.UserName));
+}
+
     document.addEventListener("DOMContentLoaded", function() {
         const pricePerDay = <?php echo $carDetails['price']; ?>;
         document.getElementById("days").setAttribute("data-price", pricePerDay);

@@ -56,11 +56,19 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-const bookedBtns = document.querySelectorAll('.booked-btn');
-bookedBtns.forEach(btn => {
+// services.js
+
+// Add event listener to the "Booked" button
+document.querySelectorAll('.booked-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    alert('This car is already booked.');
+    alert('This car is already booked!');
   });
 });
-});
+
+// Function to apply the "booked" class
+function markCarAsBooked(carItem) {
+  carItem.classList.add('booked');
+  carItem.querySelector('.card-price-wrapper .btn').textContent = 'Booked';
+  carItem.querySelector('.card-price-wrapper .btn').classList.remove('btn');
+  carItem.querySelector('.card-price-wrapper .btn').classList.add('booked-btn');
+}

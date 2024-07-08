@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/8954b3c36f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/cars.css">
   <link rel="stylesheet" href="css/details.css">
   <title>Cars</title>
 </head>

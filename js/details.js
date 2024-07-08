@@ -1,3 +1,7 @@
+let ratings = [];
+let selectedRating = 0;
+let currentCarId = null;
+let currentSlideIndex = 0; // Track the current slide index
 document.addEventListener('DOMContentLoaded', () => {
   // Assuming the button ID is 'rent_btn' and it was changed to 'rent-now-btn' for consistency
   document.getElementById('rent-now-btn').addEventListener('click', (event) => {

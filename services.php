@@ -27,6 +27,8 @@
             FROM cars c
             LEFT JOIN car_details cd ON c.car_id = cd.car_id
             LEFT JOIN bookings b ON cd.detail_id = b.car_details_id
+            WHERE c.car_status = 'active'
+            ORDER BY booking_status , c.car_id
         ");
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -36,8 +38,11 @@
         $details = json_decode($row['details']);
         $images = json_decode($row['images']);
         $isBooked = $row['booking_status'] === 'booked';
-        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
+        echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show ' . ($isBooked ? 'booked' : '') . '" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';
         echo '    <div class="featured-car-card">';
+        if ($isBooked) {
+          echo '      <div class="booked-overlay">Booked</div>';
+        }
         echo '        <figure class="card-banner">';
         echo '            <img src="' . $images[0] . '" alt="' . $row['title'] . '">';
         echo '        </figure>';
