@@ -41,6 +41,7 @@
     border-left: 10px solid var(--blue);
     transition: 0.5s;
     overflow: hidden;
+    z-index: 10;
   }
   .navigation.active {
     width: 80px;

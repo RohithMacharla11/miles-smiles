@@ -23,7 +23,9 @@ try {
             b.airport_type,
             c.title,
             c.price,
-            c.booking_date
+            c.booking_date,
+            c.no_of_days,
+            c.total_amount
         FROM bookings b
         JOIN car_details c ON b.car_details_id = c.detail_id
         WHERE b.UserName = :username AND b.booking_status = 'booked'
@@ -76,6 +78,8 @@ try {
                         <td>Title</td>
                         <td>Price</td>
                         <td>Booking Date</td>
+                        <td>No.of days</td>
+                        <td>Total Price</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,6 +97,8 @@ try {
                                 <td><?php echo htmlspecialchars($order['title']); ?></td>
                                 <td><?php echo htmlspecialchars($order['price']); ?></td>
                                 <td><?php echo htmlspecialchars($order['booking_date']); ?></td>
+                                <td><?php echo htmlspecialchars($order['no_of_days']); ?></td>
+                                <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>

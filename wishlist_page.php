@@ -7,14 +7,21 @@
   <link rel="stylesheet" href="css/services.css">
   <script src="https://kit.fontawesome.com/8954b3c36f.js" crossorigin="anonymous"></script>
 </head>
+<style>
+  .section-featured-car{
+    margin-left: 350px;
+  }
+</style>
+<?php include('navigation.php'); ?>
 <body>
 
 <?php 
-include('header.php'); 
+session_start();
 if (!isset($_SESSION["username"])) {
     header("Location: signin.php");
     exit();
 }
+
 ?>
 
 <section class="section-featured-car">
