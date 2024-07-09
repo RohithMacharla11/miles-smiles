@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2024 at 07:23 AM
+-- Generation Time: Jul 09, 2024 at 01:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -65,7 +65,11 @@ INSERT INTO `activity_log` (`username`, `activity`, `description`, `timestamp`) 
 ('admin', 'login', 'Admin logged in', '2024-07-06 10:39:04'),
 ('admin', 'admin logout', 'admin logged out', '2024-07-06 10:44:33'),
 ('admin', 'login', 'Admin logged in', '2024-07-06 10:45:38'),
-('admin', 'admin logout', 'admin logged out', '2024-07-06 10:50:40');
+('admin', 'admin logout', 'admin logged out', '2024-07-06 10:50:40'),
+('admin', 'login', 'Admin logged in', '2024-07-08 10:03:57'),
+('admin', 'login', 'Admin logged in', '2024-07-09 11:56:02'),
+('admin', 'login', 'Admin logged in', '2024-07-09 13:44:29'),
+('admin', 'login', 'Admin logged in', '2024-07-09 16:24:20');
 
 -- --------------------------------------------------------
 
@@ -86,7 +90,7 @@ CREATE TABLE `admin_register` (
 --
 
 INSERT INTO `admin_register` (`id`, `admin_username`, `email`, `phone`, `password`) VALUES
-(1, 'admin', 'macharlarohith111@gmail.com', '8555073831', '1234567890');
+(1, 'admin', 'macharlarohith111@gmail.com', '8555073838', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -109,6 +113,14 @@ CREATE TABLE `bookings` (
   `booking_status` varchar(50) NOT NULL DEFAULT 'not_booked',
   `car_details_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `booking_type`, `pickup`, `dropoff`, `pickup_date`, `pickup_time`, `return_date`, `airport_type`, `UserName`, `created_at`, `created_time`, `booking_status`, `car_details_id`) VALUES
+(247, 'One Way', 'Warangal', 'hyderabad', '2024-07-09', '07:00:00', '0000-00-00', '', 'RohithMac', '2024-07-09', '16:15:49', 'booked', 233),
+(248, 'One Way', 'delhi', 'Mumbai', '2024-07-17', '07:00:00', '0000-00-00', '', 'RohithMac', '2024-07-09', '16:47:47', 'not_booked', NULL);
 
 -- --------------------------------------------------------
 
@@ -133,14 +145,13 @@ CREATE TABLE `cars` (
 --
 
 INSERT INTO `cars` (`car_id`, `title`, `year`, `price`, `details`, `images`, `license_number`, `car_owner`, `car_status`) VALUES
-(3, 'BMW Car 2', 2020, 9500.00, '[\"6 people  \",\"Diesel\",\"Automatic\",\"Non-AC\"]', '[\"css/images/car-3.jpg\",\"css/images/car-6.jpg\",\"css/images/car-5.jpg\"]', 'TS36AE9895', 'RohithMac', 'active'),
-(4, 'Mercedes Car 3', 2021, 5000.00, '[\"4 people\",\"Electric\", \"Automatic\",\"AC\"]', '[\"css/images/car-1.jpg\", \"css/images/car-8.jpg\", \"css/images/car-9.jpg\"]', 'TS26TG8978', 'Dheeraj', 'active'),
-(5, 'Tesla Car 4', 2022, 6500.00, '[\"5 people\",\"Electric\", \"Automatic\",\"AC\"]', '[\"css/images/car-10.jpg\", \"css/images/car-1.jpg\", \"css/images/car-2.jpg\"]', 'TS34FG8937', 'Akhil', 'not-active'),
-(6, 'Honda Car 5', 2018, 4999.00, '[\"4 people\",\"Gasoline\", \"Manual\",\"AC\"]', '[\"css/images/car-3.jpg\", \"css/images/car-4.jpg\", \"css/images/car-5.jpg\"]', 'AP32DF1234', 'Kailash', 'active'),
+(4, 'TATA NEXON', 2021, 5000.00, '[\"2021 Model\",\"Manual\",\"  2 Large bags\",\" 1 Small bag\",\"5 Persons\",\"Petrol Vehicle\",\"  8.5km/L\"]', '[\"css/images/nexon/car1.jpg\",\"css/images/nexon/car2.jpg\",\"css/images/nexon/car3.jpg\",\"css/images/nexon/car4.jpg\",\"css/images/nexon/car5.jpg\"]', 'TS26TG8978', 'Dheeraj', 'active'),
+(5, 'maruti-Eeco', 2022, 6500.00, '[\"2022 Model\",\"Manual\",\"2 Large bag\",\"3 Small bags\",\"5 Persons\",\"diesel Vehicle\",\"11km/L\"]', '[\"css/images/maruti-Eeco/car1.jpg\",\"css/images/maruti-Eeco/car2.jpg\",\"css/images/maruti-Eeco/car3.jpg\",\"css/images/maruti-Eeco/car4.jpg\",\"css/images/maruti-Eeco/car5.jpg\"]', 'TS34FG8937', 'Akhil', 'active'),
+(6, 'RENAULT', 2018, 4999.00, '[\"2018 Model \",\"Manual\",\"2 Large bags\",\"1 Small bag\",\"5 Persons\",\"Petrol Vehicle\",\"9km/L\",\"\"]', '[\"css/images/renault/car1.jpg\",\"css/images/renault/car2.jpg\",\"css/images/renault/car3.jpg\",\"css/images/renault/car4.jpg\",\"css/images/renault/car5.jpg\"]', 'AP32DF1234', 'Kailash', 'active'),
 (8, 'Ford Car 7', 2020, 7500.00, '[\"5 people\",\"Gasoline\", \"Automatic\",\"AC\"]', '[\"css/images/car-9.jpg\", \"css/images/car-2.jpg\", \"css/images/car-1.jpg\"]', 'TS89TR1267', 'Shiva', 'not-active'),
-(9, 'Chevrolet Car 8', 2021, 6999.00, '[\"5 people\",\"Diesel\", \"Manual\",\"AC\"]', '[\"css/images/car-2.jpg\", \"css/images/car-3.jpg\", \"css/images/car-4.jpg\"]', 'AP34RF5748', 'Sunil', 'active'),
-(10, 'Nissan Car 9', 2018, 6799.00, '[\"4 people\",\"Gasoline\", \"Automatic\",\"AC\"]', '[\"css/images/car-5.jpg\", \"css/images/car-6.jpg\", \"css/images/car-7.jpg\"]', 'TS10WS5490', 'Sunny', 'active'),
-(11, 'Hyundai Car 10', 2022, 5899.00, '[\"5 people\",\"Gasoline\", \"Automatic\",\"AC\"]', '[\"css/images/car-8.jpg\", \"css/images/car-9.jpg\", \"css/images/car-3.jpg\"]', 'TS76YS4562', 'Chaithanya', 'not-active');
+(9, 'TATA ALTROZ', 2021, 6999.00, '[\"2021 Model\",\"Automatic\",\"1 Large bags\",\"1 Small bag\",\"5 Persons\",\"EV Vehicle\",\"320km/charge\",\"\"]', '[\"css/images/tata/car1.jpg\",\"css/images/tata/car2.jpg\",\"css/images/tata/car3.jpg\",\"css/images/tata/car4.jpg\",\"css/images/tata/car5.jpg\"]', 'AP34RF5748', 'Sunil', 'active'),
+(10, 'TATA PUNCH', 2019, 6799.00, '[\"2019 Model\",\"Automatic\",\"1 Large bag\",\"1 Small bag\",\"5 Persons\",\"petrol Vehicle\",\"13km/L\",\"\"]', '[\"css/images/punch/car1.jpg\",\"css/images/punch/car2.jpg\",\"css/images/punch/car3.jpg\",\"css/images/punch/car4.jpg\",\"css/images/punch/car5.jpg\"]', 'TS10WS5490', 'Sunny', 'active'),
+(11, 'Hyundai Car 10', 2022, 5899.00, '[\"2022 Model\",\"Automatic\",\"2 Large bags\",\"1 Small bag\",\"5 Persons\",\"Petrol Vehicle\",\"10km/L\",\"\"]', '[\"css/images/hyundai/car1.jpg\",\"css/images/hyundai/car2.jpg\",\"css/images/hyundai/car3.jpg\",\"css/images/hyundai/car4.jpg\",\"css/images/hyundai/car5.jpg\"]', 'TS76YS4562', 'Chaithanya', 'active');
 
 -- --------------------------------------------------------
 
@@ -157,8 +168,17 @@ CREATE TABLE `car_details` (
   `details` text DEFAULT NULL,
   `images` text DEFAULT NULL,
   `username` varchar(255) NOT NULL,
-  `booking_date` date NOT NULL DEFAULT current_timestamp()
+  `booking_date` date NOT NULL DEFAULT current_timestamp(),
+  `no_of_days` int(11) NOT NULL,
+  `total_amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `car_details`
+--
+
+INSERT INTO `car_details` (`detail_id`, `car_id`, `title`, `year`, `price`, `details`, `images`, `username`, `booking_date`, `no_of_days`, `total_amount`) VALUES
+(233, 4, 'TATA NEXON', 2021, 5000.00, '[', '[', 'RohithMac', '2024-07-09', 2, 10000);
 
 -- --------------------------------------------------------
 
@@ -180,7 +200,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`FullName`, `UserName`, `EMail`, `Phone`, `Password`, `profile_photo`) VALUES
-('Rohith Macharla', 'RohithMac', 'macharlarohith111@gmail.com', '7780598470', '$2y$10$Tjd4.4lPy65WTEPKleTu2.U7.WoS0aMTzQNZ7w4ZJN/VxDMj1OHHG', 0x75706c6f6164732f526f686974684d61636861726c612d496d6743726561746f7241492e706e67);
+('mitta.dheeraj33@gmail.com', 'dheeraj55', '2203A52161@gmail.com', '7989481578', '$2y$10$oBGEXY5LflvUAjaSqnX8auCjPKDfEq7WyQazL96.fUjHAggTOtuga', 0x75706c6f6164732f6e65786f6e2d666163656c6966742d6578746572696f722d72696768742d66726f6e742d74687265652d717561727465722d36392e77656270),
+('Rohith Macharla', 'RohithMac', 'macharlarohith111@gmail.com', '7780598470', '$2y$10$iQlrRZSV.zrIzqUS62vXg.lMgMhUUi4Nvo.gnx1UfZKKI43kTEEvW', 0x75706c6f6164732f526f686974684d61636861726c612d496d6743726561746f7241492e706e67);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `wishlist_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `car_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`wishlist_id`, `username`, `car_id`) VALUES
+(23, 'RohithMac', 3),
+(24, 'demo3', 3);
 
 --
 -- Indexes for dumped tables
@@ -228,6 +269,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `UserName_2` (`UserName`);
 
 --
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`wishlist_id`),
+  ADD KEY `username` (`username`),
+  ADD KEY `car_id` (`car_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -241,7 +290,7 @@ ALTER TABLE `admin_register`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
 
 --
 -- AUTO_INCREMENT for table `cars`
@@ -253,7 +302,13 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT for table `car_details`
 --
 ALTER TABLE `car_details`
-  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -263,15 +318,8 @@ ALTER TABLE `car_details`
 -- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`UserName`),
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`UserName`) REFERENCES `users` (`UserName`),
   ADD CONSTRAINT `fk_booking` FOREIGN KEY (`car_details_id`) REFERENCES `car_details` (`detail_id`);
-
---
--- Constraints for table `car_details`
---
-ALTER TABLE `car_details`
-  ADD CONSTRAINT `car_details_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
-  ADD CONSTRAINT `car_details_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`UserName`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

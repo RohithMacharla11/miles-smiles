@@ -42,9 +42,8 @@ include('includes/navbar.php');
                         <div class="form-group">
                             <label>Details</label>
                             <div id="details-group">
-                                <?php foreach ($details as $detail) { ?>
-                                    <input type="text" name="edit_details[]" value="<?php echo $detail; ?>" class="form-control mb-2" placeholder="Enter Detail">
-                                <?php } ?>
+                                <!-- Initially show only the first detail input -->
+                                <input type="text" name="edit_details[]" value="<?php echo $details[0] ?? ''; ?>" class="form-control mb-2" placeholder="Model">
                             </div>
                             <button type="button" class="btn btn-secondary" onclick="addDetail()">Add More Details</button>
                         </div>
@@ -72,6 +71,7 @@ include('includes/navbar.php');
                         <a href="active_cars.php" class="btn btn-danger">CANCEL</a>
                         <button type="submit" name="cupdatebtn" class="btn btn-primary">Update</button>
                     </form>
+
             <?php
                 }
             }
@@ -81,14 +81,20 @@ include('includes/navbar.php');
 </div>
 
 <script>
+    var detailNames = ["Model", "Type", "Large Bag", "Small Bags", "Persons", "Tagline", "l.km", "Detail 1", "Detail 2", "Detail 3", "Detail 4", "Detail 5"];
+    var detailIndex = 1; // Start from the second detail since the first is already shown
+
     function addDetail() {
-        var detailsGroup = document.getElementById('details-group');
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.name = 'edit_details[]';
-        input.className = 'form-control mb-2';
-        input.placeholder = 'Enter Detail';
-        detailsGroup.appendChild(input);
+        if (detailIndex < detailNames.length) {
+            var detailsGroup = document.getElementById('details-group');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'edit_details[]';
+            input.className = 'form-control mb-2';
+            input.placeholder = detailNames[detailIndex];
+            detailsGroup.appendChild(input);
+            detailIndex++;
+        }
     }
 
     function addImage() {
@@ -101,6 +107,7 @@ include('includes/navbar.php');
         imagesGroup.appendChild(input);
     }
 </script>
+
 
 <?php
 include('includes/scripts.php');

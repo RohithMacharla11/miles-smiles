@@ -41,10 +41,15 @@ if (!isset($_SESSION["username"])) {
       $stmt->execute();
       $stmt->setFetchMode(PDO::FETCH_ASSOC);
       $cars = $stmt->fetchAll();
-
+      if(empty($cars)){
+          echo "Wishlist is Empty";
+          echo '<button class="btn wishlist-btn " type="button" onclick="location.href=\'services.php\'">Back to Services</button>';
+        }
       foreach ($cars as $row) {
+        
         $details = json_decode($row['details']);
         $images = json_decode($row['images']);
+        
         $isWishlisted = $row['wishlist_id'] !== null;
         echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show">';
         echo '    <div class="featured-car-card">';

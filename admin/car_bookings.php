@@ -32,7 +32,7 @@ include('includes/navbar.php');
       <?php
 $connection = mysqli_connect("localhost", "root", "", "car_users");
 
-$query = "SELECT cd.username, cd.title, cd.price, c.license_number, b.booking_type, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.return_date, b.airport_type, b.booking_status 
+$query = "SELECT cd.username, cd.title, cd.price,cd.no_of_days,cd.total_amount, c.license_number, b.booking_type, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.return_date, b.airport_type, b.booking_status 
           FROM car_details cd 
           JOIN cars c ON cd.car_id = c.car_id
           JOIN bookings b ON cd.detail_id = b.car_details_id";
@@ -44,7 +44,6 @@ $query_run = mysqli_query($connection, $query);
     <tr>
       <th>User Name</th>
       <th>Car Title</th>
-      <th>Price</th>
       <th>License Number</th>
       <th>Booking Type</th>
       <th>Pickup Location</th>
@@ -54,6 +53,9 @@ $query_run = mysqli_query($connection, $query);
       <th>Return Date</th>
       <th>Airport Type</th>
       <th>Booking Status</th>
+      <th>Price per day</th>
+      <th>No.of days</th>
+      <th>Total Price</th>
       <th>EDIT</th>
     </tr>
   </thead>
@@ -65,7 +67,7 @@ $query_run = mysqli_query($connection, $query);
         <tr>
           <td><?php echo $row['username']; ?></td>
           <td><?php echo $row['title']; ?></td>
-          <td><?php echo $row['price']; ?></td>
+          
           <td><?php echo $row['license_number']; ?></td>
           <td><?php echo $row['booking_type']; ?></td>
           <td><?php echo $row['pickup']; ?></td>
@@ -75,6 +77,9 @@ $query_run = mysqli_query($connection, $query);
           <td><?php echo $row['return_date']; ?></td>
           <td><?php echo $row['airport_type']; ?></td>
           <td><?php echo $row['booking_status']; ?></td>
+          <td><?php echo $row['price']; ?></td>
+          <td><?php echo $row['no_of_days']; ?></td>
+          <td><?php echo $row['total_amount']; ?></td>
           <td>
             <form action="car_bookings_edit.php" method="post">
               <input type="hidden" name="edit_bookingid" value="<?php echo $row['username']; ?>">

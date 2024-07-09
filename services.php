@@ -31,7 +31,7 @@
     LEFT JOIN bookings b ON cd.detail_id = b.car_details_id
     LEFT JOIN wishlist w ON c.car_id = w.car_id AND w.username = :username
     WHERE c.car_status = 'active'
-    ORDER BY c.car_id
+    ORDER BY b.booking_status, c.car_id
 ");
 
         $stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
@@ -44,16 +44,7 @@
         foreach ($cars as $row) {
           $details = json_decode($row['details']);
           $images = json_decode($row['images']);
-          $isBooked = false;
-
-          if (!empty($row['pickup_date']) && !empty($row['return_date'])) {
-            $pickupDate = new DateTime($row['pickup_date']);
-            $returnDate = new DateTime($row['return_date']);
-
-            if ($currentDate >= $pickupDate && $currentDate <= $returnDate) {
-              $isBooked = true;
-            }
-          }
+          $isBooked = isset($row['booking_status']) && $row['booking_status'] === 'booked';
           $isWishlisted = $row['wishlist_id'] !== null;
 
           echo '<li class="car-item ' . strtolower(explode(' ', $row['title'])[0]) . ' show ' . ($isBooked ? 'booked' : '') . '" data-brand="' . strtolower(explode(' ', $row['title'])[0]) . '" data-price="' . str_replace(['₹', '/day'], '', $row['price']) . '" data-ac="' . (in_array("AC", $details) ? 'ac' : 'non-ac') . '" data-seating="' . explode(' ', $details[0])[0] . '">';

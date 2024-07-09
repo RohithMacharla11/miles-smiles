@@ -1,3 +1,12 @@
+   <style>
+    .profile-photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        vertical-align: middle;
+    }
+   </style>
    <!-- Sidebar -->
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -294,11 +303,27 @@
                                Hello Admin
 
                            </span>
-                           <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"><!--profile icon -->
+                           <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">profile icon -->
+                           <?php
+                            require "dbconfig.php";
+
+                            $username = $_SESSION['admin_username'];
+                            $stmt = $connection->prepare("SELECT profile_photo FROM admin_register WHERE admin_username = ?");
+                            $stmt->bind_param('s', $username);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $user = $result->fetch_assoc();
+                            $profile_photo = $user['profile_photo'];
+
+                            if (isset($profile_photo) && !empty($profile_photo)) : ?>
+                               <img src="<?php echo htmlspecialchars($profile_photo); ?>" alt="Profile Photo" class="profile-photo">
+                           <?php else : ?>
+                               <img src="php/css/images/th.jpg" class="profile-photo">
+                           <?php endif; ?>
                        </a>
                        <!-- Dropdown - User Information -->
                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                           <a class="dropdown-item" href="#">
+                           <a class="dropdown-item" href="profile.php">
                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                Profile
                            </a>

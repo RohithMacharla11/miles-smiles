@@ -49,9 +49,9 @@
             <a><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp; <?php echo $details[3]; ?><br></a>
           </div>
           <div class="icon-second">
-            <a><i class="fa-solid fa-people-group"></i>&nbsp;&nbsp; <?php echo $details[1]; ?><br></a>
-            <a><i class="fa-solid fa-droplet"></i>&nbsp;&nbsp; <?php echo $details[0]; ?><br></a>
-            <a><i class="fa-solid fa-gauge-simple-high"></i>&nbsp;&nbsp; <?php echo $details[0]; ?><br></a>
+            <a><i class="fa-solid fa-people-group"></i>&nbsp;&nbsp; <?php echo $details[4]; ?><br></a>
+            <a><i class="fa-solid fa-droplet"></i>&nbsp;&nbsp; <?php echo $details[5]; ?><br></a>
+            <a><i class="fa-solid fa-gauge-simple-high"></i>&nbsp;&nbsp; <?php echo $details[6]; ?><br></a>
           </div>
         </div>
         <div class="arrow-section">
@@ -59,7 +59,7 @@
           <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[0]; ?></a><br>
           <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?></a><br>
           <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?></a><br>
-          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[2]; ?></a><br>
+          <a><i class="fa-solid fa-angles-right"></i>&nbsp;&nbsp; <?php echo $details[4]; ?></a><br>
         </div>
         <div class="price-section">
           <p class="price" id="car-price"><?php echo $car['price']; ?> / day</p>
@@ -99,8 +99,25 @@
   ?>
   <br>
   <div class="reviews">
-    <h2>Description</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <h2>Description</h2><p>
+    Welcome to our premier car rental service, where convenience meets reliability. Whether you're
+    gearing up for a scenic road trip, searching for a dependable vehicle for a business engagement,
+    or simply needing a temporary replacement, our website offers a seamless experience from start 
+    to finish. Discover our extensive fleet featuring a variety of well-maintained cars, from practical
+    compact options to luxurious models, all available at competitive rates. With intuitive booking 
+    processes and transparent pricing, we make finding the perfect vehicle effortless. Count on our 
+    dedication to exceptional service and customer satisfaction to ensure your rental experience is 
+    both memorable and stress-free. Explore the endless possibilities with us today and let us take 
+    you where you need to go.<br>
+
+<br>
+At our car rental service, we prioritize your peace of mind and convenience above all else. Beyond offering
+a diverse selection of vehicles, we strive to exceed your expectations with personalized customer support 
+and flexible rental terms tailored to your needs. Whether you're looking for short-term rentals or long-term
+leasing options, our commitment to quality remains unwavering. Experience the freedom of the open road with
+confidence, knowing that our team is dedicated to ensuring every aspect of your journey is smooth and 
+enjoyable. Ready to embark on your next adventure? Explore our website today and discover why we're your 
+trusted partner in car rentals.</p>
     <h2>Reviews</h2>
     <div id="review-list">
       <!-- Reviews will be appended here -->
