@@ -12,7 +12,7 @@
     margin-left: 350px;
   }
 </style>
-<?php include('navigation.php'); ?>
+
 <body>
 
 <?php 
@@ -23,7 +23,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 ?>
-
+<?php include('navigation.php'); ?>
 <section class="section-featured-car">
   <div class="container">
     <ul class="featured-car-list">
@@ -77,6 +77,6 @@ if (!isset($_SESSION["username"])) {
 </section>
 
 <script src="js/services.js"></script>
-<?php include('footer.php'); ?>
+
 </body>
 </html>
