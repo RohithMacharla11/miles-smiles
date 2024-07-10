@@ -49,16 +49,16 @@
     <br>
     <div class="car-container-section">
     <div class="car-section">
-            <img src="css/images/tata/car1.jpg"height="350px"width="608px" style="border-radius:20px 0 0 0;">
+            <img src="css/images/renault/car1.jpg"height="350px"width="608px" style="border-radius:20px 0 0 0;">
             <div class="car-gird">
-            <img src="css/images/tata/car2.jpg"height="186px"width="300px">
-             <img src="css/images/tata/car3.jpg"height="186px"width="300px">
-              <img src="css/images/tata/car4.jpg"height="186px"width="300px"style="border-radius:0 0 0 20px;">
-              <img src="css/images/tata/car5.jpg"height="186px"width="300px">
+            <img src="css/images/renault/car2.jpg"height="186px"width="300px">
+             <img src="css/images/renault/car3.jpg"height="186px"width="300px">
+              <img src="css/images/renault/car4.jpg"height="186px"width="300px"style="border-radius:0 0 0 20px;">
+              <img src="css/images/renault/car5.jpg"height="186px"width="300px">
             </div>
         </div>
         <div class="car-content-section">
-            <h1>Tata Tiago, The Most Powerful Cars </h1><br>
+            <h1>Renault, The Most Comfortable Cars </h1><br>
             <div class="cont-gird">
                 <div class="icon-first">
                     <a> <i class="fa-solid fa-clock"></i>&nbsp;&nbsp; 2019 Model<br></a>
@@ -86,7 +86,7 @@
     <div class="car-container-section">
 
         <div class="car-content-section">
-            <h1>Tata Tiago, The Most Powerful Cars </h1><br>
+            <h1>Hyundai, The Most Luxurious Cars </h1><br>
             <div class="cont-gird">
                 <div class="icon-first">
                     <a> <i class="fa-solid fa-clock"></i>&nbsp;&nbsp; 2019 Model<br></a>
@@ -109,28 +109,28 @@
             </div>
         </div>
         <div class="car-section">
-            <img src="css/images/tata/car1.jpg"height="350px"width="608px" style="border-radius:20px 0 0 0;">
+            <img src="css/images/hyundai/car1.jpg"height="350px"width="608px" style="border-radius:20px 0 0 0;">
             <div class="car-gird">
-            <img src="css/images/tata/car2.jpg"height="186px"width="300px">
-             <img src="css/images/tata/car3.jpg"height="186px"width="300px">
-              <img src="css/images/tata/car4.jpg"height="186px"width="300px"style="border-radius:0 0 0 20px;">
-              <img src="css/images/tata/car5.jpg"height="186px"width="300px">
+            <img src="css/images/hyundai/car2.jpg"height="186px"width="300px">
+             <img src="css/images/hyundai/car3.jpg"height="186px"width="300px">
+              <img src="css/images/hyundai/car4.jpg"height="186px"width="300px"style="border-radius:0 0 0 20px;">
+              <img src="css/images/hyundai/car5.jpg"height="186px"width="300px">
             </div>
         </div>
     </div>
     <br>
     <div class="car-container-section">
     <div class="car-section">
-            <img src="css/images/tata/car1.jpg"height="350px"width="608px" style="border-radius:20px 0 0 0;">
+            <img src="css/images/nexon/car1.jpg"height="350px"width="608px" style="border-radius:20px 0 0 0;">
             <div class="car-gird">
-            <img src="css/images/tata/car2.jpg"height="186px"width="300px">
-             <img src="css/images/tata/car3.jpg"height="186px"width="300px">
-              <img src="css/images/tata/car4.jpg"height="186px"width="300px"style="border-radius:0 0 0 20px;">
-              <img src="css/images/tata/car5.jpg"height="186px"width="300px">
+            <img src="css/images/nexon/car2.jpg"height="186px"width="300px">
+             <img src="css/images/nexon/car3.jpg"height="186px"width="300px">
+              <img src="css/images/nexon/car4.jpg"height="186px"width="300px"style="border-radius:0 0 0 20px;">
+              <img src="css/images/nexon/car5.jpg"height="186px"width="300px">
             </div>
         </div>
         <div class="car-content-section">
-            <h1>Tata Tiago, The Most Powerful Cars </h1><br>
+            <h1>Nexon, The Most Stylish Cars </h1><br>
             <div class="cont-gird">
                 <div class="icon-first">
                     <a> <i class="fa-solid fa-clock"></i>&nbsp;&nbsp; 2019 Model<br></a>

@@ -52,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['profile_photo'] = $profile_photo;
 
     // Redirect to avoid resubmission and refresh data
-    header("Location: profile.php");
-    exit();
+    
     ob_end_flush();
 }
 
