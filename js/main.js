@@ -21,6 +21,6 @@ toggle.onclick = function () {
 };
 
 // Debugging: Check if "CAR RENTAL" link is clickable
-document.querySelector('.navigation a[href="home.php"]').addEventListener('click', function(event) {
+document.querySelector('.navigation a[href="index.php"]').addEventListener('click', function(event) {
   console.log('CAR RENTAL link clicked');
 });

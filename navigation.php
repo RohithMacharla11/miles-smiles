@@ -17,7 +17,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="home.php">
+                    <a href="index.php">
                         <span class="icon">
                             <i class="fa-solid fa-car"></i>
                         </span>

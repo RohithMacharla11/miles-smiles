@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $hashed_password)) {
             // Store username in session
             $_SESSION['username'] = $username;
-            header('Location: home.php');
+            header('Location: index.php');
             exit();
         } else {
             echo "Invalid username or password";

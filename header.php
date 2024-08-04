@@ -58,9 +58,9 @@ session_start();
 <body>
     <header>
         <nav>
-            <a id="hero" href="home.php" class="logo">Car Hire</a>
+            <a id="hero" href="index.php" class="logo">Car Hire</a>
             <div class="navbar">
-                <a href="home.php">Home</a>
+                <a href="index.php">Home</a>
                 <a href="cars.php">Cars</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>

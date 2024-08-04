@@ -200,7 +200,7 @@ h3[color="red"] {
                         <label>Confirm Password</label>
                         <input type="password" name="edit_con_password" class="form-control" placeholder="Re-Enter New Password" required>
                     </div>
-                    <a href="home.php" class="btn btn-danger">Back To Home</a>
+                    <a href="index..php" class="btn btn-danger">Back To Home</a>
                     <!-- <a href="register.php" class="btn btn-danger">CANCEL</a> -->
                     <button type="submit" name="updatebtn" class="btn btn-primary">Update</button>
                 </form>

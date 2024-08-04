@@ -94,7 +94,7 @@ echo '</script>';
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    window.location.href = 'home.php';
+                    window.location.href = 'index.php';
                 } else {
                     alert('Failed to update booking status.');
                 }

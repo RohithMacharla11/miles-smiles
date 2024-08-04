@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $username;
             $_SESSION['fullname'] = $fullname;
             // Redirect to the home page
-            header('Location: home.php');
+            header('Location: index.php');
         } else {
             echo "Error: " . $stmt->errorInfo()[2];
         }

@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" id="saveButton" style="display: none;">Save and Continue</button>
             </form>
             <br>
-            <button type="button" onclick="location.href='home.php'">Back to Home</button>
+            <button type="button" onclick="location.href='index.php'">Back to Home</button>
         </div>
     </div>
 
