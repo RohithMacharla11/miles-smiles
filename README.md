@@ -54,8 +54,6 @@ Update database credentials in the config.php file.
 
 Place the project folder in the htdocs directory of XAMPP.
 Access the site via http://localhost/car-rental-website.
-## Screenshots
-Include screenshots showcasing key pages like the homepage, vehicle listings, booking form, and admin panel.
 
 Contribution
 Feel free to fork the repository and submit pull requests for enhancements.
