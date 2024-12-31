@@ -1,27 +1,64 @@
-Car Rental Website
-Overview
-This Car Rental Website is a dynamic platform built using PHP and other relevant web technologies. It is designed to provide users with a seamless experience for renting cars. The website includes various features to enhance the user experience and simplify the car rental process.
+# Car Rental Website  
 
-Key Features
-User-Friendly Interface: Clean and intuitive design for easy navigation.
-Vehicle Listings: Detailed listings of available vehicles with images, descriptions, rental rates, and availability status.
-Search and Filter Options: Allows users to search for vehicles based on criteria such as location, type, price range, and more.
-Booking System: Robust booking system enabling users to reserve vehicles online, complete with a calendar for selecting rental dates and times.
-User Accounts: Users can create accounts to manage bookings, view rental history, and save preferences.
-Payment Integration: Secure payment gateway integration for processing online payments.
-Admin Panel: Administrative backend for managing vehicle listings, bookings, user accounts, and payments.
-Responsive Design: Optimized for various devices, ensuring a smooth experience on desktops, tablets, and smartphones.
+A dynamic web platform for seamless car rental services. This project simplifies the car rental process by providing a user-friendly interface, robust booking system, secure payment integration, and admin capabilities to manage vehicle listings and user accounts.  
 
-Technologies Used:
-PHP
-HTML/CSS
-JavaScript
-Bootstrap
-MySQL
-Apache server
+## Features  
 
-Tools Used:
-Vs Code
-Xaamp
-Live server
+### User Features  
+- **Clean and Responsive Design**: Optimized for desktops, tablets, and smartphones.  
+- **Vehicle Listings**: View detailed information about available vehicles, including images, descriptions, and rental rates.  
+- **Search and Filter Options**: Find vehicles quickly based on location, type, price range, and more.  
+- **Online Booking System**: Reserve vehicles using a calendar to select rental dates and times.  
+- **Secure Payments**: Integrated payment gateway for safe transactions.  
+- **User Accounts**: Manage bookings, view rental history, and save preferences.  
 
+### Admin Features  
+- **Admin Panel**: Manage vehicle listings, bookings, user accounts, and payments efficiently.  
+- **Reports**: Track rental data and analyze trends.  
+
+## Technologies Used  
+- **Frontend**:  
+  - HTML, CSS, JavaScript  
+  - Bootstrap for responsive design  
+
+- **Backend**:  
+  - PHP  
+
+- **Database**:  
+  - MySQL  
+
+- **Server**:  
+  - Apache (via XAMPP)  
+
+## Tools Used  
+- **Development Tools**:  
+  - Visual Studio Code  
+  - XAMPP for local development and testing  
+  - Live Server for instant preview  
+
+## Installation  
+
+1. **Clone the Repository**:  
+   ```bash  
+   git clone https://github.com/your-username/car-rental-website.git  
+   cd car-rental-website  
+
+2. **Set Up the Database**:
+
+Use XAMPP to start MySQL and Apache server.
+Create a database in phpMyAdmin and import the provided SQL file (database.sql).
+3. **Configure the Project**:
+
+Update database credentials in the config.php file.
+4. **Run the Website**:
+
+Place the project folder in the htdocs directory of XAMPP.
+Access the site via http://localhost/car-rental-website.
+## Screenshots
+Include screenshots showcasing key pages like the homepage, vehicle listings, booking form, and admin panel.
+
+Contribution
+Feel free to fork the repository and submit pull requests for enhancements.
+
+License
+This project is open-source and available under the MIT License.
